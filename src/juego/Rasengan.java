@@ -24,19 +24,19 @@ public class Rasengan {
 	}
 	
 	public void moverDerecha() {
-		this.x+= 2; 
+		this.x+= 3; 
 	}
 	
 	public void moverIzquierda() {
-		this.x-=2;
+		this.x-=3;
 	}
 	
 	public void moverArriba() {
-		this.y -= 2;
+		this.y -= 3;
 	}
 	
 	public void moverAbajo() {
-		this.y +=2;
+		this.y +=3;
 	}
 
 	public double getX() {

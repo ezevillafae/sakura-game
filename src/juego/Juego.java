@@ -51,28 +51,27 @@ public class Juego extends InterfaceJuego
 	}
 	
 	private void movimientoRasengan() {
-		
-		
 		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null)
 			this.rasengan = sakura.disparar();
 			
 		// asigna a null si el rasengan llega a los limites 
 		if(this.rasengan != null) {
-			if(this.rasengan.getX() == 0 || this.rasengan.getX() == anchoPantalla || this.rasengan.getY() == 0 || this.rasengan.getY() == altoPantalla)
+			if(colisionRasengan())
 				this.rasengan = null;
 		}
 		
-		
-		
+
 		if(this.rasengan != null) {
 			rasengan.moverArriba();
 			rasengan.dibujar(entorno);
 		}
 	}
+	
+	private boolean colisionRasengan() {
+		return this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
+	}
 
-	public void movimientoSakura() {
-		
-		
+	private void movimientoSakura() {
 		// Limites y movimientos arriba abajo izquierda y derecha
 		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2))
 			sakura.moverDerecha();
@@ -82,10 +81,7 @@ public class Juego extends InterfaceJuego
 			sakura.moverArriba();
 		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2))
 			sakura.moverAbajo();
-		
 		sakura.dibujar(entorno);
-		
-		
 	}
 	
 	
