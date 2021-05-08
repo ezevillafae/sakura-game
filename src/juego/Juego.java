@@ -14,6 +14,7 @@ public class Juego extends InterfaceJuego
 	private int anchoPantalla;
 	private int altoPantalla; 
 	private Sakura sakura;
+	private Rasengan rasengan;
 	
 	Juego()
 	{
@@ -42,21 +43,45 @@ public class Juego extends InterfaceJuego
 		// ...   
 		
 		movimientoSakura();
+		
+		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null)
+			this.rasengan = sakura.disparar();
+			
+		if(this.rasengan != null) {
+			if(this.rasengan.getX() == 0 || this.rasengan.getX() == anchoPantalla || this.rasengan.getY() == 0 || this.rasengan.getY() == altoPantalla)
+				this.rasengan = null;
+		}
+		
+		
+		if(this.rasengan != null) {
+			rasengan.moverArriba();
+			rasengan.dibujar(entorno);
+		}
+		
+		
+		
+		
 		sakura.dibujar(entorno);
 		
 
 	}
 	
 	public void movimientoSakura() {
-		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA))
+		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2))
 			sakura.moverDerecha();
-		else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
+		else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && sakura.getX() > (sakura.getAncho()/2))
 			sakura.moverIzquierda();
-		else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA))
+		else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA) && sakura.getY() > (sakura.getAlto()/2))
 			sakura.moverArriba();
-		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO))
+		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2))
 			sakura.moverAbajo();
+		
+		
 	}
+	
+	
+	
+	
 	
 
 	@SuppressWarnings("unused")

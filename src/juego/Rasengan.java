@@ -4,14 +4,15 @@ import java.awt.Color;
 
 import entorno.Entorno;
 
-public class Sakura {
-	private double x;
-	private double y;
-	private double ancho;
-	private double alto;
+public class Rasengan {
 	
+	public double x;
+	public double y;
+	public double ancho;
+	public double alto;
 	
-	public Sakura(double x, double y, double ancho, double alto) {
+	public Rasengan(double x, double y, double ancho, double alto) {
+		
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
@@ -19,13 +20,8 @@ public class Sakura {
 	}
 	
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
+		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);
 	}
-	
-	public Rasengan disparar() {
-		return new Rasengan(x,y,5,5);
-	}
-	
 	
 	public void moverDerecha() {
 		this.x+= 2; 
@@ -59,8 +55,6 @@ public class Sakura {
 		return alto;
 	}
 	
-	
-
 	
 	
 	
