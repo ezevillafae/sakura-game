@@ -11,14 +11,20 @@ public class Juego extends InterfaceJuego
 	
 	// Variables y métodos propios de cada grupo
 	// ...
+	private int anchoPantalla;
+	private int altoPantalla; 
+	private Sakura sakura;
 	
 	Juego()
 	{
 		// Inicializa el objeto entorno
-		this.entorno = new Entorno(this, "Sakura Ikebana Delivery - Grupo XX - v1", 800, 600);
+		this.anchoPantalla = 800;
+		this.altoPantalla = 600;
+		this.entorno = new Entorno(this, "Sakura Ikebana Delivery - Grupo 03 - v1", anchoPantalla, altoPantalla);
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
 
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -33,9 +39,23 @@ public class Juego extends InterfaceJuego
 	public void tick()
 	{
 		// Procesamiento de un instante de tiempo
-		// ...
+		// ...   
+		
+		movimientoSakura();
+		sakura.dibujar(entorno);
 		
 
+	}
+	
+	public void movimientoSakura() {
+		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA))
+			sakura.moverDerecha();
+		else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA))
+			sakura.moverIzquierda();
+		else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA))
+			sakura.moverArriba();
+		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO))
+			sakura.moverAbajo();
 	}
 	
 
