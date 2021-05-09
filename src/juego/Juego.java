@@ -14,6 +14,7 @@ public class Juego extends InterfaceJuego
 	private int altoPantalla; 
 	private Sakura sakura;
 	private Rasengan rasengan;
+	private Manzana manzana;
 	private boolean[] direcciones;
 	
 	Juego()
@@ -27,6 +28,7 @@ public class Juego extends InterfaceJuego
 		// ...
 		direcciones = new boolean[4];
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
+		this.manzana = new Manzana(200, 300, 100, 100);
 
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -42,7 +44,7 @@ public class Juego extends InterfaceJuego
 	{
 		// Procesamiento de un instante de tiempo
 		// ...   
-		
+		this.manzana.dibujar(entorno);
 		ultimaFlechaApretada();
 		movimientoSakura();
 		movimientoRasengan();
