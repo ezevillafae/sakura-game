@@ -51,8 +51,27 @@ public class Juego extends InterfaceJuego
 	}
 	
 	private void movimientoRasengan() {
-		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null)
+		
+		// si se presiona la tecla espacio y no existe un disparo, se crea un disparo
+		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null) {
 			this.rasengan = sakura.disparar();
+			
+			if(entorno.estaPresionada(entorno.TECLA_DERECHA)) {
+				this.rasengan.setDireccion(2);			
+			}else if(entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
+				this.rasengan.setDireccion(4);
+			}else if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+				this.rasengan.setDireccion(1);
+			}else if(entorno.estaPresionada(entorno.TECLA_ABAJO)) {
+				this.rasengan.setDireccion(3);
+			}
+			
+				
+		}
+			
+			
+		
+		
 			
 		// asigna a null si el rasengan llega a los limites 
 		if(this.rasengan != null) {
@@ -62,8 +81,8 @@ public class Juego extends InterfaceJuego
 		
 
 		if(this.rasengan != null) {
-			rasengan.moverArriba();
-			rasengan.dibujar(entorno);
+			this.rasengan.moverse();
+			this.rasengan.dibujar(entorno);
 		}
 	}
 	

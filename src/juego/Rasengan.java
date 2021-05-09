@@ -6,10 +6,11 @@ import entorno.Entorno;
 
 public class Rasengan {
 	
-	public double x;
-	public double y;
-	public double ancho;
-	public double alto;
+	private double x;
+	private double y;
+	private double ancho;
+	private double alto;
+	private int direccion;
 	
 	public Rasengan(double x, double y, double ancho, double alto) {
 		
@@ -17,10 +18,27 @@ public class Rasengan {
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.direccion = 1;
 	}
 	
 	public void dibujar(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);
+	}
+	
+	public void moverse() {
+		if(this.direccion == 1) {
+			moverArriba();
+		}else if(this.direccion == 2) {
+			moverDerecha();
+		}else if(this.direccion == 3) {
+			moverAbajo();
+		}else if(this.direccion == 4) {
+			moverIzquierda();
+		}
+	}
+	
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
 	}
 	
 	public void moverDerecha() {
