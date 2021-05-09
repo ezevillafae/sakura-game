@@ -1,6 +1,5 @@
 package juego;
 
-
 import entorno.Entorno;
 import entorno.InterfaceJuego;
 
@@ -15,6 +14,7 @@ public class Juego extends InterfaceJuego
 	private int altoPantalla; 
 	private Sakura sakura;
 	private Rasengan rasengan;
+	private boolean[] direcciones;
 	
 	Juego()
 	{
@@ -25,6 +25,7 @@ public class Juego extends InterfaceJuego
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
+		direcciones = new boolean[4];
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
 
 		// Inicia el juego!
@@ -42,12 +43,43 @@ public class Juego extends InterfaceJuego
 		// Procesamiento de un instante de tiempo
 		// ...   
 		
-		
+		ultimaFlechaApretada();
 		movimientoSakura();
 		movimientoRasengan();
 		
 		
 
+	}
+	
+	private void ultimaFlechaApretada() {
+		/*
+		 * direccion[0] arriba
+		 * direccion[1] derecha
+		 * direccion[2] abajo 
+		 * direccion[3] izquierda
+		 */
+		
+		if(entorno.sePresiono(entorno.TECLA_ARRIBA)) {
+			direcciones[0] = true; 
+			direcciones[1] = false;
+			direcciones[2] = false;
+			direcciones[3] = false;
+		}else if(entorno.sePresiono(entorno.TECLA_DERECHA)) {
+			direcciones[0] = false; 
+			direcciones[1] = true;
+			direcciones[2] = false;
+			direcciones[3] = false;
+		}else if(entorno.sePresiono(entorno.TECLA_ABAJO)) {
+			direcciones[0] = false; 
+			direcciones[1] = false;
+			direcciones[2] = true;
+			direcciones[3] = false;
+		}else if(entorno.sePresiono(entorno.TECLA_IZQUIERDA)) {
+			direcciones[0] = false; 
+			direcciones[1] = false;
+			direcciones[2] = false;
+			direcciones[3] = true;
+		}
 	}
 	
 	private void movimientoRasengan() {
@@ -56,22 +88,20 @@ public class Juego extends InterfaceJuego
 		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null) {
 			this.rasengan = sakura.disparar();
 			
-			if(entorno.estaPresionada(entorno.TECLA_DERECHA)) {
-				this.rasengan.setDireccion(2);			
-			}else if(entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
-				this.rasengan.setDireccion(4);
-			}else if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+			// dependiendo que tecla se apreto por ultima vez se establece la direccion del rasengan
+			if (direcciones[0]) {
 				this.rasengan.setDireccion(1);
-			}else if(entorno.estaPresionada(entorno.TECLA_ABAJO)) {
+			}else if(direcciones[1]) {
+				this.rasengan.setDireccion(2);
+			}else if(direcciones[2]) {
 				this.rasengan.setDireccion(3);
+			}else if(direcciones[3]) {
+				this.rasengan.setDireccion(4);
 			}
 			
 				
 		}
 			
-			
-		
-		
 			
 		// asigna a null si el rasengan llega a los limites 
 		if(this.rasengan != null) {
@@ -80,6 +110,7 @@ public class Juego extends InterfaceJuego
 		}
 		
 
+		// se mueve y dibuja el rasengan
 		if(this.rasengan != null) {
 			this.rasengan.moverse();
 			this.rasengan.dibujar(entorno);
