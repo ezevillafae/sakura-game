@@ -1,5 +1,8 @@
 package juego;
 
+import java.awt.Color;
+import java.awt.Rectangle;
+
 import entorno.Entorno;
 import entorno.InterfaceJuego;
 
@@ -14,7 +17,8 @@ public class Juego extends InterfaceJuego
 	private int altoPantalla; 
 	private Sakura sakura;
 	private Rasengan rasengan;
-	private Manzana manzana;
+	private Ciudad aldea;
+	private Manzana[][] manzanas;
 	private boolean[] direcciones;
 	
 	Juego()
@@ -28,8 +32,8 @@ public class Juego extends InterfaceJuego
 		// ...
 		direcciones = new boolean[4];
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
-		this.manzana = new Manzana(200, 300, 300, 250);
-
+		this.aldea = new Ciudad();
+		this.manzanas = aldea.getManzanas();
 		// Inicia el juego!
 		this.entorno.iniciar();
 	}
@@ -44,7 +48,13 @@ public class Juego extends InterfaceJuego
 	{
 		// Procesamiento de un instante de tiempo
 		// ...   
-		this.manzana.dibujar(entorno);
+		/*entorno.dibujarRectangulo(185/2, 83.33/2, 185, 83.33, 0, Color.red);
+		entorno.dibujarRectangulo((185/2)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
+		entorno.dibujarRectangulo(((185/2)+185+20)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
+		entorno.dibujarRectangulo((((185/2)+185+20)+185+20)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
+		entorno.dibujarRectangulo(185/2, (83.33/2)+83.33+20, 185, 83.33, 0, Color.red);
+		this.manzana.dibujar(entorno);*/
+		aldea.dibujar(entorno);
 		ultimaFlechaApretada();
 		movimientoSakura();
 		movimientoRasengan();
@@ -120,7 +130,8 @@ public class Juego extends InterfaceJuego
 	}
 	
 	private boolean colisionRasengan() {
-		return this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
+		boolean limites = this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
+		return limites;
 	}
 
 	private void movimientoSakura() {
@@ -136,6 +147,18 @@ public class Juego extends InterfaceJuego
 		sakura.dibujar(entorno);
 	}
 	
+	
+	public boolean colisionSakura() {
+		for (int i = 0; i < manzanas.length; i++) {
+			for (int j = 0; j < manzanas[i].length; j++) {
+				if(Rectangulo.colision(this.sakura.getRect(), manzanas[i][j].getRect())) {
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
 	
 	
 	

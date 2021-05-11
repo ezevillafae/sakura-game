@@ -57,6 +57,10 @@ public class Manzana {
 		return casas;
 	}
 	
+	public Rectangulo getRect() {
+		return new Rectangulo(x, y, ancho, alto);
+	}
+	
 	
 	
 	
