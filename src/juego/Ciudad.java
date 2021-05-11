@@ -13,7 +13,7 @@ public class Ciudad {
 	
 			
 	public Ciudad() {
-		this.anchoCalle = 20;
+		this.anchoCalle = 50;
 		this.ancho = 800;
 		this.alto = 600;
 		this.callesHorizontales = 3;

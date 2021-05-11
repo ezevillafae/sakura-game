@@ -73,6 +73,10 @@ public class Rasengan {
 		return alto;
 	}
 	
+	public Rectangulo getRect() {
+		return new Rectangulo(x, y, ancho, alto);
+	}
+	
 	
 	
 	

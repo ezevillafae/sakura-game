@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Color;
-import java.awt.Rectangle;
 
 import entorno.Entorno;
 
@@ -29,19 +28,19 @@ public class Sakura {
 	
 	
 	public void moverDerecha() {
-		this.x+= 10; 
+		this.x+= 2; 
 	}
 	
 	public void moverIzquierda() {
-		this.x-=10;
+		this.x-=2;
 	}
 	
 	public void moverArriba() {
-		this.y -= 10;
+		this.y -= 2;
 	}
 	
 	public void moverAbajo() {
-		this.y +=10;
+		this.y +=2;
 	}
 
 	public double getX() {

@@ -130,8 +130,18 @@ public class Juego extends InterfaceJuego
 	}
 	
 	private boolean colisionRasengan() {
+		
+		boolean colisionManzana = false;
+		for (int i = 0; i < manzanas.length; i++) {
+			for (int j = 0; j < manzanas[i].length; j++) {
+				if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
+					colisionManzana = true;
+				}
+			}
+		}
+		
 		boolean limites = this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
-		return limites;
+		return limites || colisionManzana;
 	}
 
 	private void movimientoSakura() {
@@ -145,19 +155,6 @@ public class Juego extends InterfaceJuego
 		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2))
 			sakura.moverAbajo();
 		sakura.dibujar(entorno);
-	}
-	
-	
-	public boolean colisionSakura() {
-		for (int i = 0; i < manzanas.length; i++) {
-			for (int j = 0; j < manzanas[i].length; j++) {
-				if(Rectangulo.colision(this.sakura.getRect(), manzanas[i][j].getRect())) {
-					return true;
-				}
-			}
-		}
-		return false;
-		
 	}
 	
 	
