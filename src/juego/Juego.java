@@ -78,8 +78,6 @@ public class Juego extends InterfaceJuego {
 	
 	
 	private boolean colisionRasengan() {
-		
-		boolean colisionManzana = false;
 		for (int i = 0; i < manzanas.length; i++) {
 			for (int j = 0; j < manzanas[i].length; j++) {
 				if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
