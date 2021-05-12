@@ -83,13 +83,11 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < manzanas.length; i++) {
 			for (int j = 0; j < manzanas[i].length; j++) {
 				if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
-					colisionManzana = true;
+					return true;
 				}
 			}
 		}
-		
-		boolean limites = this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
-		return limites || colisionManzana;
+		return this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
 	}
 
 	private void movimientoSakura() {
