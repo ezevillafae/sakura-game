@@ -58,7 +58,7 @@ public class Rectangulo {
 		}else if((r1.x - (r1.ancho/2)) > (r2.x + (r2.ancho/2))) {
 			return false;
 		// r1.bordeDerecho < r2.bordeIzquierdo
-		}else if((r1.x- (r1.ancho/2)) < (r2.x - (r2.ancho/2))) {
+		}else if((r1.x+ (r1.ancho/2)) < (r2.x - (r2.ancho/2))) {
 			return false;
 		}else {
 			return true;

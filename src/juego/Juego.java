@@ -95,16 +95,39 @@ public class Juego extends InterfaceJuego {
 		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2)) {
 			sakura.setDireccion(2);
 			sakura.moverse();
+			if(colisionSakura()) {
+				sakura.moverIzquierda();
+			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && sakura.getX() > (sakura.getAncho()/2)) {
 			sakura.setDireccion(4);
 			sakura.moverse();
+			if(colisionSakura()) {
+				sakura.moverDerecha();
+			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA) && sakura.getY() > (sakura.getAlto()/2)) {
 			sakura.setDireccion(1);
 			sakura.moverse();
+			if(colisionSakura()) {
+				sakura.moverAbajo();
+			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2)) {
 			sakura.setDireccion(3);
 			sakura.moverse();
+			if(colisionSakura()) {
+				sakura.moverArriba();
+			}
 		}	
+	}
+	
+	private boolean colisionSakura() {
+		for (int i = 0; i < manzanas.length; i++) {
+			for (int j = 0; j < manzanas[i].length; j++) {
+				if(Rectangulo.colision(sakura.getRect(), manzanas[i][j].getRect())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	
