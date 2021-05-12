@@ -26,7 +26,6 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		direcciones = new boolean[4];
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
 		this.aldea = new Ciudad();
 		this.manzanas = aldea.getManzanas();
