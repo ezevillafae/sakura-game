@@ -27,7 +27,7 @@ public class Juego extends InterfaceJuego {
 		// Inicializar lo que haga falta para el juego
 		// ...
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
-		this.aldea = new Ciudad();
+		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.manzanas = aldea.getManzanas();
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -91,6 +91,8 @@ public class Juego extends InterfaceJuego {
 	}
 
 	private void movimientoSakura() {
+		
+		
 		// Limites y movimientos arriba abajo izquierda y derecha
 		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2)) {
 			sakura.setDireccion(2);

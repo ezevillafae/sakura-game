@@ -22,11 +22,14 @@ public class Ciudad {
 		crearManzanas();
 	}
 	
-	public Ciudad(double ancho, double alto,int callesVerticales, int callesHorizontales) {
+	public Ciudad(double ancho, double alto,int callesVerticales, int callesHorizontales,double anchoCalle) {
+		this.anchoCalle = anchoCalle;
 		this.ancho = ancho;
 		this.alto = alto;
 		this.callesHorizontales = callesHorizontales;
 		this.callesVerticales = callesVerticales;
+		this.manzanas = new Manzana[callesHorizontales+1][callesVerticales+1];
+		crearManzanas();
 	}
 	
 	public void dibujar(Entorno entorno) {
