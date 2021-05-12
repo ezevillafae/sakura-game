@@ -1,13 +1,11 @@
 package juego;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 
 import entorno.Entorno;
 import entorno.InterfaceJuego;
 
-public class Juego extends InterfaceJuego
-{
+public class Juego extends InterfaceJuego {
 	// El objeto Entorno que controla el tiempo y otros
 	private Entorno entorno;
 	
@@ -19,10 +17,8 @@ public class Juego extends InterfaceJuego
 	private Rasengan rasengan;
 	private Ciudad aldea;
 	private Manzana[][] manzanas;
-	private boolean[] direcciones;
 	
-	Juego()
-	{
+	Juego(){
 		// Inicializa el objeto entorno
 		this.anchoPantalla = 800;
 		this.altoPantalla = 600;
@@ -38,61 +34,12 @@ public class Juego extends InterfaceJuego
 		this.entorno.iniciar();
 	}
 
-	/**
-	 * Durante el juego, el método tick() será ejecutado en cada instante y 
-	 * por lo tanto es el método más importante de esta clase. Aquí se debe 
-	 * actualizar el estado interno del juego para simular el paso del tiempo 
-	 * (ver el enunciado del TP para mayor detalle).
-	 */
-	public void tick()
-	{
-		// Procesamiento de un instante de tiempo
-		// ...   
-		/*entorno.dibujarRectangulo(185/2, 83.33/2, 185, 83.33, 0, Color.red);
-		entorno.dibujarRectangulo((185/2)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
-		entorno.dibujarRectangulo(((185/2)+185+20)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
-		entorno.dibujarRectangulo((((185/2)+185+20)+185+20)+185+20, 83.33/2, 185, 83.33, 0, Color.red);
-		entorno.dibujarRectangulo(185/2, (83.33/2)+83.33+20, 185, 83.33, 0, Color.red);
-		this.manzana.dibujar(entorno);*/
+	public void tick(){
 		aldea.dibujar(entorno);
-		ultimaFlechaApretada();
 		movimientoSakura();
 		movimientoRasengan();
-		
-		
-
 	}
 	
-	private void ultimaFlechaApretada() {
-		/*
-		 * direccion[0] arriba
-		 * direccion[1] derecha
-		 * direccion[2] abajo 
-		 * direccion[3] izquierda
-		 */
-		
-		if(entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-			direcciones[0] = true; 
-			direcciones[1] = false;
-			direcciones[2] = false;
-			direcciones[3] = false;
-		}else if(entorno.sePresiono(entorno.TECLA_DERECHA)) {
-			direcciones[0] = false; 
-			direcciones[1] = true;
-			direcciones[2] = false;
-			direcciones[3] = false;
-		}else if(entorno.sePresiono(entorno.TECLA_ABAJO)) {
-			direcciones[0] = false; 
-			direcciones[1] = false;
-			direcciones[2] = true;
-			direcciones[3] = false;
-		}else if(entorno.sePresiono(entorno.TECLA_IZQUIERDA)) {
-			direcciones[0] = false; 
-			direcciones[1] = false;
-			direcciones[2] = false;
-			direcciones[3] = true;
-		}
-	}
 	
 	private void movimientoRasengan() {
 		
@@ -101,20 +48,19 @@ public class Juego extends InterfaceJuego
 			this.rasengan = sakura.disparar();
 			
 			// dependiendo que tecla se apreto por ultima vez se establece la direccion del rasengan
-			if (direcciones[0]) {
+			if (sakura.getDireccion() == 1) {
 				this.rasengan.setDireccion(1);
-			}else if(direcciones[1]) {
+			}else if(sakura.getDireccion() == 2) {
 				this.rasengan.setDireccion(2);
-			}else if(direcciones[2]) {
+			}else if(sakura.getDireccion() == 3) {
 				this.rasengan.setDireccion(3);
-			}else if(direcciones[3]) {
+			}else if(sakura.getDireccion() == 4) {
 				this.rasengan.setDireccion(4);
 			}
 			
 				
 		}
-			
-			
+				
 		// asigna a null si el rasengan llega a los limites 
 		if(this.rasengan != null) {
 			if(colisionRasengan())
@@ -128,6 +74,8 @@ public class Juego extends InterfaceJuego
 			this.rasengan.dibujar(entorno);
 		}
 	}
+	
+	
 	
 	private boolean colisionRasengan() {
 		
@@ -146,14 +94,19 @@ public class Juego extends InterfaceJuego
 
 	private void movimientoSakura() {
 		// Limites y movimientos arriba abajo izquierda y derecha
-		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2))
-			sakura.moverDerecha();
-		else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && sakura.getX() > (sakura.getAncho()/2))
-			sakura.moverIzquierda();
-		else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA) && sakura.getY() > (sakura.getAlto()/2))
-			sakura.moverArriba();
-		else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2))
-			sakura.moverAbajo();
+		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2)) {
+			sakura.setDireccion(2);
+			sakura.moverse();
+		}else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && sakura.getX() > (sakura.getAncho()/2)) {
+			sakura.setDireccion(4);
+			sakura.moverse();
+		}else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA) && sakura.getY() > (sakura.getAlto()/2)) {
+			sakura.setDireccion(1);
+			sakura.moverse();
+		}else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2)) {
+			sakura.setDireccion(3);
+			sakura.moverse();
+		}	
 		sakura.dibujar(entorno);
 	}
 	

@@ -9,6 +9,7 @@ public class Sakura {
 	private double y;
 	private double ancho;
 	private double alto;
+	private int direccion;
 	
 	
 	public Sakura(double x, double y, double ancho, double alto) {
@@ -24,6 +25,26 @@ public class Sakura {
 	
 	public Rasengan disparar() {
 		return new Rasengan(x,y,5,5);
+	}
+	
+	public void moverse() {
+		if(this.direccion == 1) {
+			moverArriba();
+		}else if(this.direccion == 2) {
+			moverDerecha();
+		}else if(this.direccion == 3) {
+			moverAbajo();
+		}else if(this.direccion == 4) {
+			moverIzquierda();
+		}
+	}
+	
+	public int getDireccion() {
+		return this.direccion;
+	}
+	
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
 	}
 	
 	
