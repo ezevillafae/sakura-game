@@ -40,13 +40,14 @@ public class Ciudad {
 	public void crearManzanas() {
 		double anchoManzana = (this.ancho - (this.anchoCalle*callesVerticales))/(callesVerticales+1);
 		double altoManzana = (this.alto - (this.anchoCalle*callesHorizontales))/(callesHorizontales+1);
-		double x = 0;
+		double x = anchoManzana/2;
 		double y = altoManzana/2;
 		
 		for (int i = 0; i < manzanas.length; i++) {
 			x = anchoManzana/2;
 			for (int j = 0; j < manzanas[i].length; j++) {
 				manzanas[i][j] = new Manzana(x,y,anchoManzana,altoManzana);
+				System.out.println("ancho " + manzanas[i][j].getAncho() + " alto " + manzanas[i][j].getAlto());
 				x += anchoManzana + anchoCalle;
 			}
 			y += altoManzana + anchoCalle;
