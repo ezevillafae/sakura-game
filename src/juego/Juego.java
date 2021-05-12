@@ -36,6 +36,7 @@ public class Juego extends InterfaceJuego {
 	public void tick(){
 		aldea.dibujar(entorno);
 		movimientoSakura();
+		sakura.dibujar(entorno);
 		movimientoRasengan();
 	}
 	
@@ -106,7 +107,6 @@ public class Juego extends InterfaceJuego {
 			sakura.setDireccion(3);
 			sakura.moverse();
 		}	
-		sakura.dibujar(entorno);
 	}
 	
 	

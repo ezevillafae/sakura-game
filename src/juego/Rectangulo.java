@@ -8,8 +8,8 @@ public class Rectangulo {
 	private double alto;
 	
 	public Rectangulo(double x, double y, double ancho, double alto) {
-		this.x = x-(ancho/2);
-		this.y = y-(alto/2);
+		this.x = x;
+		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
 	}
@@ -47,13 +47,18 @@ public class Rectangulo {
 	}
 	
 	public static boolean colision(Rectangulo r1, Rectangulo r2) {
-		if(r1.x > r2.x + r2.ancho) {
+		
+		// r1.bordeSuperior > r2.bordeInferior
+		if((r1.y - (r1.alto/2)) > (r2.y + (r2.alto/2))) {
 			return false;
-		}else if(r1.x + r1.ancho < r2.x) {
+		//r1.bordeInferior < r2.bordeSuperior
+		}else if((r1.y + (r1.alto/2)) < (r2.y - (r2.alto/2))) {
 			return false;
-		}else if(r1.y > r2.y + r2.alto) {
+		//r1.bordeIzquiedo > r2.bordeDerecho
+		}else if((r1.x - (r1.ancho/2)) > (r2.x + (r2.ancho/2))) {
 			return false;
-		}else if(r1.y + r1.alto < r2.y) {
+		// r1.bordeDerecho < r2.bordeIzquierdo
+		}else if((r1.x- (r1.ancho/2)) < (r2.x - (r2.ancho/2))) {
 			return false;
 		}else {
 			return true;
