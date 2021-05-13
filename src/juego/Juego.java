@@ -55,9 +55,7 @@ public class Juego extends InterfaceJuego {
 				this.rasengan.setDireccion(3);
 			}else if(sakura.getDireccion() == 4) {
 				this.rasengan.setDireccion(4);
-			}
-			
-				
+			}		
 		}
 				
 		// asigna a null si el rasengan llega a los limites 
