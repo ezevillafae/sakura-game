@@ -37,6 +37,10 @@ public class Juego extends InterfaceJuego {
 		movimientoSakura();
 		sakura.dibujar(entorno);
 		movimientoRasengan();
+		colisionRasengan();
+		if(this.rasengan != null){
+			this.rasengan.dibujar(entorno);
+		}
 	}
 	
 	
@@ -57,32 +61,37 @@ public class Juego extends InterfaceJuego {
 				this.rasengan.setDireccion(4);
 			}		
 		}
-				
-		// asigna a null si el rasengan llega a los limites 
-		if(this.rasengan != null) {
-			if(colisionRasengan())
-				this.rasengan = null;
-		}
-		
-
-		// se mueve y dibuja el rasengan
+			
+		// se mueve
 		if(this.rasengan != null) {
 			this.rasengan.moverse();
-			this.rasengan.dibujar(entorno);
 		}
 	}
 	
 	
 	
 	private boolean colisionRasengan() {
-		for (int i = 0; i < manzanas.length; i++) {
-			for (int j = 0; j < manzanas[i].length; j++) {
-				if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
-					return true;
+		if(this.rasengan != null){
+			// colision con manzanas
+			for (int i = 0; i < manzanas.length; i++) {
+				for (int j = 0; j < manzanas[i].length; j++) {
+					if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
+						this.rasengan = null;
+						return true;
+					}
 				}
 			}
+			//colision con limites
+			if(this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla){
+				this.rasengan = null;
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
 		}
-		return this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla;
+		
 	}
 
 	private void movimientoSakura() {
