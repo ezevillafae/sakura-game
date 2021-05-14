@@ -10,6 +10,7 @@ public class Ciudad {
 	private int callesHorizontales;
 	private Manzana[][] manzanas;
 	private double anchoCalle;
+	private int cantManzanas;
 	
 			
 	public Ciudad() {
@@ -18,6 +19,7 @@ public class Ciudad {
 		this.alto = 600;
 		this.callesHorizontales = 3;
 		this.callesVerticales = 3;
+		this.cantManzanas = (callesHorizontales+1)*(callesVerticales+1); 
 		this.manzanas = new Manzana[callesHorizontales+1][callesVerticales+1];
 		crearManzanas();
 	}
@@ -50,11 +52,14 @@ public class Ciudad {
 			x = anchoManzana/2;
 			for (int j = 0; j < manzanas[i].length; j++) {
 				manzanas[i][j] = new Manzana(x,y,anchoManzana,altoManzana);
-				System.out.println("ancho " + manzanas[i][j].getAncho() + " alto " + manzanas[i][j].getAlto());
 				x += anchoManzana + anchoCalle;
 			}
 			y += altoManzana + anchoCalle;
 		}
+	}
+	
+	public int getCantCasas() {
+		return this.cantManzanas;
 	}
 
 	public Manzana[][] getManzanas() {

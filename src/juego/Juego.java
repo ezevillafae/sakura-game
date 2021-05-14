@@ -1,6 +1,10 @@
 package juego;
 
 
+import java.awt.Color;
+import java.awt.Image;
+import java.util.Random;
+
 import entorno.Entorno;
 import entorno.InterfaceJuego;
 
@@ -16,6 +20,8 @@ public class Juego extends InterfaceJuego {
 	private Rasengan rasengan;
 	private Ciudad aldea;
 	private Manzana[][] manzanas;
+	private Casa casaEntrega;
+	private boolean entregado;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -28,18 +34,33 @@ public class Juego extends InterfaceJuego {
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
 		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.manzanas = aldea.getManzanas();
+		this.casaEntrega = null;
+		this.entregado = false;
 		// Inicia el juego!
 		this.entorno.iniciar();
 	}
 
 	public void tick(){
 		aldea.dibujar(entorno);
+		elegirCasa();
+		if(this.casaEntrega != null) {
+			//dibuja la flecha que señaliza la casa que hay que hacer la entrega (cambiar rectangulo por flecha)
+			entorno.dibujarRectangulo(casaEntrega.getX(), casaEntrega.getY()-20, 20, 20, 0, Color.BLUE);
+		}
 		movimientoSakura();
 		sakura.dibujar(entorno);
 		movimientoRasengan();
 		colisionRasengan();
 		if(this.rasengan != null){
 			this.rasengan.dibujar(entorno);
+		}
+	}
+	
+	private void elegirCasa() {
+		if(this.casaEntrega == null) {
+			Random rand = new Random();
+			Manzana manzanaElegida = manzanas[rand.nextInt(manzanas.length)][rand.nextInt(manzanas[0].length)];
+			this.casaEntrega = manzanaElegida.getCasas()[rand.nextInt(manzanaElegida.getCasas().length)];
 		}
 	}
 	
@@ -135,6 +156,8 @@ public class Juego extends InterfaceJuego {
 		}
 		return false;
 	}
+	
+	
 	
 	
 	
