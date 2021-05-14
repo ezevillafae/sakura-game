@@ -12,6 +12,19 @@ public class Ciudad {
 	private double anchoCalle;
 	
 			
+	public double getAnchoCalle() {
+		return anchoCalle;
+	}
+
+	public int getCallesVerticales() {
+		return callesVerticales;
+	}
+
+	public int getCallesHorizontales() {
+		return callesHorizontales;
+	}
+
+
 	public Ciudad() {
 		this.anchoCalle = 40;
 		this.ancho = 800;

@@ -1,5 +1,5 @@
 package juego;
-
+import java.util.Random;
 
 import entorno.Entorno;
 import entorno.InterfaceJuego;
@@ -16,6 +16,9 @@ public class Juego extends InterfaceJuego {
 	private Rasengan rasengan;
 	private Ciudad aldea;
 	private Manzana[][] manzanas;
+	private Ninja [] ninjas;
+	private Ninja ninja;
+	private Ninja ninja2;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -30,6 +33,15 @@ public class Juego extends InterfaceJuego {
 		this.manzanas = aldea.getManzanas();
 		// Inicia el juego!
 		this.entorno.iniciar();
+		this.ninjas = new Ninja [6];// coordenada x e y tienen que ser de 1/4 2/4 y 3/4 del ancho y alto
+		Random r= new Random();
+		for (int i = 0; i < ninjas.length; i++) {
+			int valor = r.nextInt(aldea.getCallesHorizontales())+1;
+			this.ninjas[i]=new Ninja((( manzanas[0][0].getAncho()*valor)+ (aldea.getAnchoCalle()/2) ), 20, 10, 15);
+			
+		}
+		this.ninja=new Ninja(190, 140, 10, 15);
+		this.ninja2=new Ninja((190*2)+20, 140, 10, 15);// (anchomanza)*random cantidad)+anchocalle/2, altomanzana*random de cantidad calles+altocalle/2
 	}
 
 	public void tick(){
@@ -37,8 +49,19 @@ public class Juego extends InterfaceJuego {
 		movimientoSakura();
 		sakura.dibujar(entorno);
 		movimientoRasengan();
+		for (int i = 0; i < ninjas.length; i++) {
+			ninjas[i].dibujar(entorno);
+		}
 	}
-	
+
+
+	private void movimientoNinjas(){
+		Random r= new Random();
+		int valor= r.nextInt(4);
+		if (valor==0) {
+			
+		}
+	}
 	
 	private void movimientoRasengan() {
 		
@@ -56,7 +79,7 @@ public class Juego extends InterfaceJuego {
 			}else if(sakura.getDireccion() == 4) {
 				this.rasengan.setDireccion(4);
 			}
-			
+		
 				
 		}
 				
