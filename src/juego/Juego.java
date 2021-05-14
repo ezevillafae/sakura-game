@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.util.Random;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 import entorno.InterfaceJuego;
 
 public class Juego extends InterfaceJuego {
@@ -44,8 +45,8 @@ public class Juego extends InterfaceJuego {
 		aldea.dibujar(entorno);
 		elegirCasa();
 		if(this.casaEntrega != null) {
-			//dibuja la flecha que señaliza la casa que hay que hacer la entrega (cambiar rectangulo por flecha)
-			entorno.dibujarRectangulo(casaEntrega.getX(), casaEntrega.getY()-20, 20, 20, 0, Color.BLUE);
+			Image imgFlecha = Herramientas.cargarImagen("imagenes/flecha2.png");
+			entorno.dibujarImagen(imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
 		}
 		movimientoSakura();
 		sakura.dibujar(entorno);
@@ -59,8 +60,60 @@ public class Juego extends InterfaceJuego {
 	private void elegirCasa() {
 		if(this.casaEntrega == null) {
 			Random rand = new Random();
-			Manzana manzanaElegida = manzanas[rand.nextInt(manzanas.length)][rand.nextInt(manzanas[0].length)];
-			this.casaEntrega = manzanaElegida.getCasas()[rand.nextInt(manzanaElegida.getCasas().length)];
+			int fila = rand.nextInt(manzanas.length);
+			int columna = rand.nextInt(manzanas[0].length);
+			Manzana manzanaElegida = manzanas[fila][columna];
+			
+			
+			if(fila == 0) {
+				if(columna == 0) {
+					int casa = rand.nextInt(3)+1;
+					if(casa != 2) {
+						this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige la casa de la derecha y abajo
+					}
+				}else if(columna == manzanas[0].length-1) {
+					int casa = rand.nextInt(2)+1;
+					this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige la casa de abajo y la izquierda
+				}else {
+					int casa = rand.nextInt(3)+1;
+					this.casaEntrega = manzanaElegida.getCasas()[casa]; // no elige las casas de arriba
+				}
+	
+			}else if(fila == manzanas.length-1) { // fila inferior
+				if(columna == 0) {
+					int casa = rand.nextInt(3)+1;
+					if(casa != 1 && casa != 2) {
+						this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige las casas de la derecha y arriba
+					}
+				}else if(columna == manzanas[0].length-1) {
+					int casa = rand.nextInt(3); 
+					if(casa != 1) {
+						this.casaEntrega = manzanaElegida.getCasas()[casa];
+					}
+				}else {
+					int casa = rand.nextInt(4);
+					if(casa != 1) {
+						this.casaEntrega = manzanaElegida.getCasas()[casa];
+					}
+					
+				}
+			}else { // si no elige la fila superior y la fila inferior
+				if(columna == 0) {
+					int casa = rand.nextInt(4);
+					if(casa != 2) {
+						this.casaEntrega = manzanaElegida.getCasas()[casa];
+					}
+				}else if(columna == manzanas[0].length-1) {
+					int casa = rand.nextInt(3);
+					this.casaEntrega = manzanaElegida.getCasas()[casa];
+				}else {
+					int casa = rand.nextInt(4);
+					this.casaEntrega = manzanaElegida.getCasas()[casa];
+				}
+				
+				
+			}
+			
 		}
 	}
 	
@@ -156,6 +209,12 @@ public class Juego extends InterfaceJuego {
 		}
 		return false;
 	}
+	/*
+	private boolean sakuraEntrego() {
+		if(this.casaEntrega != null) {
+			
+		}
+	}*/
 	
 	
 	

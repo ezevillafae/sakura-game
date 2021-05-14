@@ -19,9 +19,13 @@ public class Manzana {
 		this.ancho = ancho;
 		this.alto = alto;
 		this.casas = new Casa[4];
+		//casa arriba
 		casas[0] = new Casa(x, y-(alto/2)+((alto/4)/2), ancho/4, alto/4);
+		//casa abajo
 		casas[1] = new Casa(x,y+(alto/2)-((alto/4)/2),ancho/4, alto/4);
+		//casa izquieda
 		casas[2] = new Casa(x-(ancho/2)+((ancho/4)/2),y,ancho/4, alto/4);
+		//casa derecha
 		casas[3] = new Casa(x+(ancho/2)-((ancho/4)/2),y,ancho/4, alto/4);	
 	}
 	
