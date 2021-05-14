@@ -38,6 +38,10 @@ public class Casa {
 		return alto;
 	}
 	
+	public Rectangulo getRect() {
+		return new Rectangulo(x, y, ancho+20, alto+20);
+	}
+	
 	
 
 }

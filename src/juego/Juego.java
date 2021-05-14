@@ -48,6 +48,7 @@ public class Juego extends InterfaceJuego {
 			Image imgFlecha = Herramientas.cargarImagen("imagenes/flecha2.png");
 			entorno.dibujarImagen(imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
 		}
+		sakuraEntrego();
 		movimientoSakura();
 		sakura.dibujar(entorno);
 		movimientoRasengan();
@@ -209,12 +210,15 @@ public class Juego extends InterfaceJuego {
 		}
 		return false;
 	}
-	/*
-	private boolean sakuraEntrego() {
+	
+	private void sakuraEntrego() {
 		if(this.casaEntrega != null) {
-			
+			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect())) {
+				this.entregado = true;
+				this.casaEntrega = null;
+			}
 		}
-	}*/
+	}
 	
 	
 	
