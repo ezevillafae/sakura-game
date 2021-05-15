@@ -17,7 +17,7 @@ public class Juego extends InterfaceJuego {
 	private Ciudad aldea;
 	private Manzana[][] manzanas;
 	private Ninja [] ninjas;
-	private Ninja ninja;
+	
 	
 	Juego(){
 		// Inicializa el objeto entorno
