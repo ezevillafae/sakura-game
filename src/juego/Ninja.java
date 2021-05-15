@@ -18,6 +18,21 @@ public class Ninja {
     public void dibujar(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
 	}
+    public void moverDerecha() {
+		this.x+= 1; 
+	}
+	
+	public void moverIzquierda() {
+		this.x-=1;
+	}
+	
+	public void moverArriba() {
+		this.y -= 1;
+	}
+	
+	public void moverAbajo() {
+		this.y +=1;
+	}
 
     public double getX() {
         return x;

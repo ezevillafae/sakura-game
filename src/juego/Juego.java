@@ -17,6 +17,7 @@ public class Juego extends InterfaceJuego {
 	private Ciudad aldea;
 	private Manzana[][] manzanas;
 	private Ninja [] ninjas;
+	private Ninja ninja;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -46,6 +47,7 @@ public class Juego extends InterfaceJuego {
 			if(ninjas[i]!=null)
 				ninjas[i].dibujar(entorno);
 		}
+		movimientoNinjas();
 	}
 
 	private void crearUbicarN(){
@@ -66,10 +68,19 @@ public class Juego extends InterfaceJuego {
 	}
 
 	private void movimientoNinjas(){
-		Random r= new Random();
-		int valor= r.nextInt(4);
-		if (valor==0) {
-			
+		for (int i = 0; i < (ninjas.length)/2; i++) {
+			ninjas[i].moverAbajo();
+			if (ninjas[i].getY()==altoPantalla) {
+				ninjas[i].setY(0);
+				ninjas[i].moverAbajo();
+			}
+		}
+		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
+			ninjas[i].moverDerecha();
+			if (ninjas[i].getX()==anchoPantalla) {
+				ninjas[i].setX(0);
+				ninjas[i].moverDerecha();
+			}
 		}
 	}
 	
