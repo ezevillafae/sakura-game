@@ -1,4 +1,5 @@
 package juego;
+import java.util.Iterator;
 import java.util.Random;
 
 import java.awt.Color;
@@ -43,7 +44,7 @@ public class Juego extends InterfaceJuego {
 		this.entregado = false;
 		this.rasengan=null;
 		this.ninjas = new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];// crear otro for para ubiar los otrso 3 ninjas 
-		crearUbicarN();
+		iniciarNinjas();
 		// Inicia el juego!
 		this.entorno.iniciar();
 
@@ -58,6 +59,7 @@ public class Juego extends InterfaceJuego {
 		}
 		sakuraEntrego();
 		movimientoSakura();
+		colisionSakuraNinjas();
 		sakura.dibujar(entorno);
 		movimientoRasengan();
 		colisionRasengan();
@@ -69,6 +71,7 @@ public class Juego extends InterfaceJuego {
 				ninjas[i].dibujar(entorno);
 		}
 		movimientoNinjas();
+		colisionNinjas();
 	}
 	
 	private void elegirCasa() {
@@ -128,7 +131,7 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 	}	
-	private void crearUbicarN(){
+	private void iniciarNinjas(){
 		int cont=1;
 		int cont2=1;
 		for (int i = 0; i < (ninjas.length)/2; i++) {// crea los ninjas y los ubica en la esquina superior en el centro de las calles
@@ -152,17 +155,42 @@ public class Juego extends InterfaceJuego {
 
 	private void movimientoNinjas(){
 		for (int i = 0; i < (ninjas.length)/2; i++) {
-			ninjas[i].moverAbajo();
-			if (ninjas[i].getY()==altoPantalla+ninjas[i].getAlto()) {
-				ninjas[i].setY(0);
+			if(ninjas[i]!=null) {
 				ninjas[i].moverAbajo();
+				if (ninjas[i].getY()==altoPantalla+ninjas[i].getAlto()) {
+					ninjas[i].setY(0);
+					ninjas[i].moverAbajo();
+				}
 			}
 		}
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
-			ninjas[i].moverDerecha();
-			if (ninjas[i].getX()==anchoPantalla+ninjas[i].getAncho()) {
-				ninjas[i].setX(0);
+			if(ninjas[i]!=null) {
 				ninjas[i].moverDerecha();
+				if (ninjas[i].getX()==anchoPantalla+ninjas[i].getAncho()) {
+					ninjas[i].setX(0);
+					ninjas[i].moverDerecha();
+				}
+			}
+		}
+	}
+	
+	private boolean colisionNinjas() {
+		for (int i = 0; i < ninjas.length; i++) {
+			if(ninjas[i]!=null && this.rasengan != null) {
+				if(Rectangulo.colision(this.ninjas[i].getRect(), this.rasengan.getRect())) {
+					this.ninjas[i] = null;
+					this.rasengan = null;
+					return true;
+				}
+			}
+		}
+		return false;	
+	}
+	
+	private void restaurarNijas() {
+		for (int i = 0; i < ninjas.length; i++) {
+			if(ninjas[i]==null) {
+				
 			}
 		}
 	}
@@ -205,15 +233,14 @@ public class Juego extends InterfaceJuego {
 				}
 			}
 			//colision con limites
-			if(this.rasengan.getX() <= 0 || 
-			this.rasengan.getX() >= anchoPantalla || 
-			this.rasengan.getY() <= 0 || 
-			this.rasengan.getY() >= altoPantalla){
+			if(this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla){
 				this.rasengan = null;
 				return true;
 			}else{
 				return false;
 			}
+			
+			
 		}else{
 			return false;
 		}
@@ -227,31 +254,31 @@ public class Juego extends InterfaceJuego {
 		if(this.entorno.estaPresionada(entorno.TECLA_DERECHA) && sakura.getX()< anchoPantalla - (sakura.getAncho()/2)) {
 			sakura.setDireccion(2);
 			sakura.moverse();
-			if(colisionSakura()) {
+			if(colisionSakuraManzanas()) {
 				sakura.moverIzquierda();
 			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && sakura.getX() > (sakura.getAncho()/2)) {
 			sakura.setDireccion(4);
 			sakura.moverse();
-			if(colisionSakura()) {
+			if(colisionSakuraManzanas()) {
 				sakura.moverDerecha();
 			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_ARRIBA) && sakura.getY() > (sakura.getAlto()/2)) {
 			sakura.setDireccion(1);
 			sakura.moverse();
-			if(colisionSakura()) {
+			if(colisionSakuraManzanas()) {
 				sakura.moverAbajo();
 			}
 		}else if(this.entorno.estaPresionada(entorno.TECLA_ABAJO) && sakura.getY() < altoPantalla -(sakura.getAlto()/2)) {
 			sakura.setDireccion(3);
 			sakura.moverse();
-			if(colisionSakura()) {
+			if(colisionSakuraManzanas()) {
 				sakura.moverArriba();
 			}
 		}	
 	}
 	
-	private boolean colisionSakura() {
+	private boolean colisionSakuraManzanas() {
 		for (int i = 0; i < manzanas.length; i++) {
 			for (int j = 0; j < manzanas[i].length; j++) {
 				if(Rectangulo.colision(sakura.getRect(), manzanas[i][j].getRect())) {
@@ -259,7 +286,18 @@ public class Juego extends InterfaceJuego {
 				}
 			}
 		}
+		
 		return false;
+	}
+	
+	private void colisionSakuraNinjas() {
+		for (int i = 0; i < ninjas.length; i++) {
+			if(ninjas[i] != null) {
+				if(Rectangulo.colision(this.ninjas[i].getRect(), this.sakura.getRect())) {
+					entorno.dispose();
+				}
+			}
+		}
 	}
 	
 	private void sakuraEntrego() {
