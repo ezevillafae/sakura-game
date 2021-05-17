@@ -24,6 +24,7 @@ public class Juego extends InterfaceJuego {
 	private Casa casaEntrega;
 	private boolean entregado;
 	private Ninja [] ninjas;
+	private Random rand;
 	
 	
 	Juego(){
@@ -34,16 +35,17 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, 10, 15);
 		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
 		this.manzanas = aldea.getManzanas();
+		this.rand = new Random();
 		this.casaEntrega = null;
 		this.entregado = false;
-		// Inicia el juego!
 		this.rasengan=null;
-		this.entorno.iniciar();
 		this.ninjas = new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];// crear otro for para ubiar los otrso 3 ninjas 
 		crearUbicarN();
+		// Inicia el juego!
+		this.entorno.iniciar();
 
 	}
 
@@ -71,7 +73,6 @@ public class Juego extends InterfaceJuego {
 	
 	private void elegirCasa() {
 		if(this.casaEntrega == null) {
-			Random rand = new Random();
 			int fila = rand.nextInt(manzanas.length);
 			int columna = rand.nextInt(manzanas[0].length);
 			Manzana manzanaElegida = manzanas[fila][columna];
@@ -131,14 +132,19 @@ public class Juego extends InterfaceJuego {
 		int cont=1;
 		int cont2=1;
 		for (int i = 0; i < (ninjas.length)/2; i++) {// crea los ninjas y los ubica en la esquina superior en el centro de las calles
-				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (aldea.getAnchoCalle()*cont/2), 20, 10, 15);
+				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (aldea.getAnchoCalle()*cont/2),
+				 						20, 
+				 						aldea.getAnchoCalle()/2, 
+				 						this.aldea.getAnchoCalle()/2);
 				cont+=2;
 				cont2++;
 		}
 		cont=1;
 		cont2=1;
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
-				this.ninjas[i]=new Ninja(40, (manzanas[0][0].getAlto()*(cont2))+ (aldea.getAnchoCalle()*cont/2), 10, 15);
+				this.ninjas[i]=new Ninja(40, 
+										(manzanas[0][0].getAlto()*(cont2))+ (aldea.getAnchoCalle()*cont/2), 
+										aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
 				cont+=2;
 				cont2++;
 		}
@@ -147,14 +153,14 @@ public class Juego extends InterfaceJuego {
 	private void movimientoNinjas(){
 		for (int i = 0; i < (ninjas.length)/2; i++) {
 			ninjas[i].moverAbajo();
-			if (ninjas[i].getY()==altoPantalla) {
+			if (ninjas[i].getY()==altoPantalla+ninjas[i].getAlto()) {
 				ninjas[i].setY(0);
 				ninjas[i].moverAbajo();
 			}
 		}
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
 			ninjas[i].moverDerecha();
-			if (ninjas[i].getX()==anchoPantalla) {
+			if (ninjas[i].getX()==anchoPantalla+ninjas[i].getAncho()) {
 				ninjas[i].setX(0);
 				ninjas[i].moverDerecha();
 			}
@@ -199,7 +205,10 @@ public class Juego extends InterfaceJuego {
 				}
 			}
 			//colision con limites
-			if(this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla){
+			if(this.rasengan.getX() <= 0 || 
+			this.rasengan.getX() >= anchoPantalla || 
+			this.rasengan.getY() <= 0 || 
+			this.rasengan.getY() >= altoPantalla){
 				this.rasengan = null;
 				return true;
 			}else{
