@@ -326,6 +326,7 @@ public class Juego extends InterfaceJuego {
 		if(this.casaEntrega != null) {
 			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect())) {
 				this.entregado = true;
+				this.puntaje.sumar(5);
 				this.casaEntrega = null;
 			}
 		}

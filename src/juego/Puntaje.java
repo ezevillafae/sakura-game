@@ -24,7 +24,9 @@ public class Puntaje {
 	
 	public void dibujar(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.blue);
+		entorno.cambiarFont("Arial", 20, Color.white);
 		entorno.escribirTexto(Integer.toString(puntuacion), x, y);
+		
 	}
 	
 	public void sumar(int puntos) {
