@@ -52,14 +52,15 @@ public class Juego extends InterfaceJuego {
 		iniciarNinjas();
 		// Inicia el juego!
 		this.entorno.iniciar();
+		
 	}
 
 	public void tick(){
 		
 		aldea.dibujar(entorno);
-		entorno.cambiarFont("Arial", 20, Color.blue);
-		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 0, 20);
-		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 0, 40);
+		entorno.cambiarFont("Times New Roman", 20, Color.blue);
+		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
+		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
 		
 		elegirCasa();
 		if(this.casaEntrega != null) {
@@ -141,6 +142,7 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 	}	
+	
 	private void iniciarNinjas(){
 		int cont=1;
 		int cont2=1;
@@ -244,8 +246,6 @@ public class Juego extends InterfaceJuego {
 			this.rasengan.moverse();
 		}
 	}
-	
-	
 	
 	private boolean colisionRasengan() {
 		if(this.rasengan != null){
