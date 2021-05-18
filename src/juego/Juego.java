@@ -39,6 +39,7 @@ public class Juego extends InterfaceJuego {
 		// Inicializar lo que haga falta para el juego
 		// ...
 		this.puntaje = 0;
+		this.muertes = 0;
 		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
 		this.manzanas = aldea.getManzanas();
@@ -58,9 +59,7 @@ public class Juego extends InterfaceJuego {
 	public void tick(){
 		
 		aldea.dibujar(entorno);
-		entorno.cambiarFont("Times New Roman", 20, Color.blue);
-		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
-		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
+		dibujarPuntaje();
 		
 		elegirCasa();
 		if(this.casaEntrega != null) {
@@ -83,6 +82,12 @@ public class Juego extends InterfaceJuego {
 		
 		colisionNinjaRasengan();
 		restaurarNinjas(); 
+	}
+	
+	private void dibujarPuntaje() {
+		entorno.cambiarFont("Times New Roman", 20, Color.blue);
+		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
+		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
 	}
 	
 	private void elegirCasa() {

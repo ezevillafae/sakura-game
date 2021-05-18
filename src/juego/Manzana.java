@@ -1,8 +1,10 @@
 package juego;
 
 import java.awt.Color;
+import java.awt.Image;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Manzana {
 	
@@ -11,6 +13,7 @@ public class Manzana {
 	private double ancho;
 	private double alto;
 	private Casa[] casas;
+	private Image imgManzana;
 	
 	
 	public Manzana(double x, double y, double ancho, double alto) {
@@ -18,6 +21,7 @@ public class Manzana {
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.imgManzana = Herramientas.cargarImagen("imagenes/manzana.png");
 		this.casas = new Casa[4];
 		//casa arriba
 		casas[0] = new Casa(x, y-(alto/2)+((alto/4)/2), ancho/4, alto/4);
@@ -30,6 +34,7 @@ public class Manzana {
 	}
 	
 	public void dibujar(Entorno entorno) {
+		//entorno.dibujarImagen(imgManzana, x, y, 0, 0.8);
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);
 		casas[0].dibujar(entorno);
 		casas[1].dibujar(entorno);
