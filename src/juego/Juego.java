@@ -27,7 +27,8 @@ public class Juego extends InterfaceJuego {
 	private Ninja [] ninjasMuertos;
 	private Random rand;
 	private Image imgFlecha;
-	private Puntaje puntaje;
+	private int puntaje;
+	private int muertes;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -37,7 +38,7 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		this.puntaje = new Puntaje(anchoPantalla-(110/2),40/2,110,40);
+		this.puntaje = 0;
 		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
 		this.manzanas = aldea.getManzanas();
@@ -51,13 +52,15 @@ public class Juego extends InterfaceJuego {
 		iniciarNinjas();
 		// Inicia el juego!
 		this.entorno.iniciar();
-
 	}
 
 	public void tick(){
 		
 		aldea.dibujar(entorno);
-		this.puntaje.dibujar(entorno);
+		entorno.cambiarFont("Arial", 20, Color.blue);
+		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 0, 20);
+		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 0, 40);
+		
 		elegirCasa();
 		if(this.casaEntrega != null) {
 			entorno.dibujarImagen(this.imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
@@ -185,6 +188,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null && this.rasengan != null) {
 				if(Rectangulo.colision(this.ninjas[i].getRect(), this.rasengan.getRect())) {
+					this.muertes++;
 					this.ninjasMuertos[i]=this.ninjas[i];
 					this.ninjas[i] = null;
 					this.rasengan = null;
@@ -326,7 +330,7 @@ public class Juego extends InterfaceJuego {
 		if(this.casaEntrega != null) {
 			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect())) {
 				this.entregado = true;
-				this.puntaje.sumar(5);
+				this.puntaje +=5;
 				this.casaEntrega = null;
 			}
 		}
