@@ -1,5 +1,4 @@
 package juego;
-import java.util.Iterator;
 import java.util.Random;
 
 import java.awt.Color;
@@ -25,8 +24,10 @@ public class Juego extends InterfaceJuego {
 	private Casa casaEntrega;
 	private boolean entregado;
 	private Ninja [] ninjas;
+	private Ninja [] ninjasMuertos;
 	private Random rand;
-	
+	private Image imgFlecha;
+	private Puntaje puntaje;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -36,14 +37,17 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
+		this.puntaje = new Puntaje(anchoPantalla-(110/2),40/2,110,40);
 		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
 		this.manzanas = aldea.getManzanas();
 		this.rand = new Random();
 		this.casaEntrega = null;
+		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha2.png");
 		this.entregado = false;
 		this.rasengan=null;
-		this.ninjas = new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];// crear otro for para ubiar los otrso 3 ninjas 
+		this.ninjas = new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
+		this.ninjasMuertos =  new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
 		iniciarNinjas();
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -51,11 +55,12 @@ public class Juego extends InterfaceJuego {
 	}
 
 	public void tick(){
+		
 		aldea.dibujar(entorno);
+		this.puntaje.dibujar(entorno);
 		elegirCasa();
 		if(this.casaEntrega != null) {
-			Image imgFlecha = Herramientas.cargarImagen("imagenes/flecha2.png");
-			entorno.dibujarImagen(imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
+			entorno.dibujarImagen(this.imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
 		}
 		sakuraEntrego();
 		movimientoSakura();
@@ -66,12 +71,14 @@ public class Juego extends InterfaceJuego {
 		if(this.rasengan != null){
 			this.rasengan.dibujar(entorno);
 		}
+		movimientoNinjas(); 
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null)
 				ninjas[i].dibujar(entorno);
 		}
-		movimientoNinjas();
-		colisionNinjas();
+		
+		colisionNinjaRasengan();
+		restaurarNinjas(); 
 	}
 	
 	private void elegirCasa() {
@@ -174,23 +181,38 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 	
-	private boolean colisionNinjas() {
+	private void colisionNinjaRasengan() {
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null && this.rasengan != null) {
 				if(Rectangulo.colision(this.ninjas[i].getRect(), this.rasengan.getRect())) {
+					this.ninjasMuertos[i]=this.ninjas[i];
 					this.ninjas[i] = null;
 					this.rasengan = null;
-					return true;
 				}
 			}
 		}
-		return false;	
 	}
 	
-	private void restaurarNijas() {
+	private void restaurarNinjas() {
+		int cantVivos=0;
 		for (int i = 0; i < ninjas.length; i++) {
-			if(ninjas[i]==null) {
-				
+			if(ninjas[i]!=null) {
+				cantVivos++;
+			}
+		}
+		
+		if(cantVivos <=4) {
+			for (int i = 0; i < ninjasMuertos.length/2; i++) {
+				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+					this.ninjasMuertos[i].setY(0);
+					this.ninjas[i] = this.ninjasMuertos[i];
+				}
+			}
+			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
+				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+					this.ninjasMuertos[i].setX(0);
+					this.ninjas[i] = this.ninjasMuertos[i];
+				}
 			}
 		}
 	}
