@@ -16,6 +16,10 @@ public class Ninja {
 		this.ancho = ancho;
 		this.alto = alto;
 	}
+	
+	public Puas soltarPua() {
+		return new Puas(x, y, 10, 10);
+	}
 
     public void dibujar(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
