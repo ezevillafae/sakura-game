@@ -21,7 +21,7 @@ public class Manzana {
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
-		this.imgManzana = Herramientas.cargarImagen("imagenes/manzana.png");
+		this.imgManzana = Herramientas.cargarImagen("imagenes/pasto.png");
 		this.casas = new Casa[4];
 		//casa arriba
 		casas[0] = new Casa(x, y-(alto/2)+((alto/4)/2), ancho/4, alto/4);
@@ -34,8 +34,8 @@ public class Manzana {
 	}
 	
 	public void dibujar(Entorno entorno) {
-		//entorno.dibujarImagen(imgManzana, x, y, 0, 0.8);
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);
+		entorno.dibujarImagen(imgManzana, x, y, 0, 1);
+		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);
 		casas[0].dibujar(entorno);
 		casas[1].dibujar(entorno);
 		casas[2].dibujar(entorno);

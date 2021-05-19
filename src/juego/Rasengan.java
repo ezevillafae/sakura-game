@@ -1,8 +1,10 @@
 package juego;
+import java.awt.Image;
 
 import java.awt.Color;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Rasengan {
 	
@@ -11,6 +13,7 @@ public class Rasengan {
 	private double ancho;
 	private double alto;
 	private int direccion;
+	private Image rasenganImg;
 	
 	public Rasengan(double x, double y, double ancho, double alto) {
 		
@@ -19,10 +22,12 @@ public class Rasengan {
 		this.ancho = ancho;
 		this.alto = alto;
 		this.direccion = 1;
+		this.rasenganImg= Herramientas.cargarImagen("imagenes/rasengan.png");
 	}
 	
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);
+		entorno.dibujarImagen(rasenganImg, x, y, 0,0.05);
+		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);
 	}
 	
 	public void moverse() {

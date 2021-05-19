@@ -1,6 +1,8 @@
 package juego;
-
+import java.awt.Image;
 import entorno.Entorno;
+import entorno.Herramientas;
+
 import java.awt.Color;
 
 public class Ninja {
@@ -9,16 +11,20 @@ public class Ninja {
 	private double y;
 	private double ancho;
 	private double alto;
+    private Image imgNinja;
 
 	public Ninja(double x, double y, double ancho, double alto) {
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+        this.imgNinja=Herramientas.cargarImagen("imagenes/imgninja.png");
 	}
 
     public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
+		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
+        entorno.dibujarImagen(imgNinja, x, y, 0,0.70);
+
 	}
     public void moverDerecha() {
 		this.x+= 1; 
