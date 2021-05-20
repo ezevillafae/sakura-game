@@ -1,10 +1,8 @@
 package juego;
-import java.util.Random;
 
+import java.util.Random;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.Random;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -64,7 +62,6 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
-		
 	}
 
 	public void tick(){
@@ -76,7 +73,6 @@ public class Juego extends InterfaceJuego {
 		ciudad.dibujar(entorno);
 		dibujarPuntaje();
 		
-		
 		elegirCasa();
 		
 		//dibuja la flecha arriba de la casa
@@ -86,11 +82,9 @@ public class Juego extends InterfaceJuego {
 		
 		sakura.dibujar(entorno);
 		
-		
 		if(this.rasengan != null){
 			this.rasengan.dibujar(entorno);
 		}
-		
 		
 		restaurarNinjas();
 		restaurarNinja();
@@ -274,13 +268,13 @@ public class Juego extends InterfaceJuego {
 		if(cantVivos <=4) {
 			for (int i = 0; i < ninjasMuertos.length/2; i++) {
 				if(ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setY(0);
+					this.ninjasMuertos[i].setY(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 				}
 			}
 			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
 				if(ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setX(0);
+					this.ninjasMuertos[i].setX(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 				}
 			}
@@ -289,17 +283,17 @@ public class Juego extends InterfaceJuego {
 	
 	public void restaurarNinja() {
 		if(this.tickReaparicion == 0) {
-			this.tickReaparicion = 300;
+			this.tickReaparicion = 600;
 			for (int i = 0; i < ninjasMuertos.length/2; i++) {
 				if(this.ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setY(0);
+					this.ninjasMuertos[i].setY(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 					return;
 				}
 			}
 			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
 				if(ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setX(0);
+					this.ninjasMuertos[i].setX(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 					return;
 				}

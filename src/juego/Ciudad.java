@@ -36,7 +36,7 @@ public class Ciudad {
 		}
 	}
 	
-	public void crearManzanas() {
+	private void crearManzanas() {
 		double anchoManzana = (this.ancho - (this.anchoCalle*callesVerticales))/(callesVerticales+1); // calcula el ancho de las manzanas
 		double altoManzana = (this.alto - (this.anchoCalle*callesHorizontales))/(callesHorizontales+1); // calcula el alto de las manzanas
 		double x = anchoManzana/2; // pos x inicial de la primera manzana

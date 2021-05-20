@@ -1,7 +1,5 @@
 package juego;
 import java.awt.Image;
-import java.awt.Color;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -34,7 +32,6 @@ public class Casa {
 				this.imgCasa=Herramientas.cargarImagen("imagenes/casaDerecha.png");
 	}
 	public void dibujar(Entorno entorno) {
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.CYAN);
 		entorno.dibujarImagen(imgCasa, x, y, 0,1.0);
 	}
 	
