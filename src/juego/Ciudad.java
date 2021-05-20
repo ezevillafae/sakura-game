@@ -56,10 +56,10 @@ public class Ciudad {
 	}
 	
 	public void crearManzanas() {
-		double anchoManzana = (this.ancho - (this.anchoCalle*callesVerticales))/(callesVerticales+1);
-		double altoManzana = (this.alto - (this.anchoCalle*callesHorizontales))/(callesHorizontales+1);
-		double x = anchoManzana/2;
-		double y = altoManzana/2;
+		double anchoManzana = (this.ancho - (this.anchoCalle*callesVerticales))/(callesVerticales+1); // calcula el ancho de las manzanas
+		double altoManzana = (this.alto - (this.anchoCalle*callesHorizontales))/(callesHorizontales+1); // calcula el alto de las manzanas
+		double x = anchoManzana/2; // pos x inicial de la primera manzana
+		double y = altoManzana/2; // pos y inicial de la primera manzana
 		
 		for (int i = 0; i < manzanas.length; i++) {
 			x = anchoManzana/2;
