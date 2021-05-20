@@ -31,6 +31,7 @@ public class Juego extends InterfaceJuego {
 	private int puntaje;
 	private int muertes;
 	private int tickPuas;
+	private int tickReaparicion;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -59,6 +60,7 @@ public class Juego extends InterfaceJuego {
 		this.ninjasMuertos =  new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
 		this.puas = new Puas[aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
 		this.tickPuas = 600;
+		this.tickReaparicion = 300;
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -67,6 +69,7 @@ public class Juego extends InterfaceJuego {
 
 	public void tick(){
 		this.tickPuas--;
+		this.tickReaparicion--;
 		aldea.dibujar(entorno);
 		dibujarPuntaje();
 		elegirCasa();
@@ -82,7 +85,8 @@ public class Juego extends InterfaceJuego {
 			this.rasengan.dibujar(entorno);
 		}
 		
-		restaurarNinjas(); 
+		restaurarNinjas();
+		restaurarNinja();
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null)
 				ninjas[i].dibujar(entorno);
@@ -273,13 +277,34 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 	
+	public void restaurarNinja() {
+		if(this.tickReaparicion == 0) {
+			this.tickReaparicion = 300;
+			for (int i = 0; i < ninjasMuertos.length/2; i++) {
+				if(this.ninjasMuertos[i] != null && ninjas[i]==null) {
+					this.ninjasMuertos[i].setY(0);
+					this.ninjas[i] = this.ninjasMuertos[i];
+					return;
+				}
+			}
+			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
+				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+					this.ninjasMuertos[i].setX(0);
+					this.ninjas[i] = this.ninjasMuertos[i];
+					return;
+				}
+			}
+		}
+		
+	}
+	
 	private void movimientoRasengan() {
 		
 		// si se presiona la tecla espacio y no existe un disparo, se crea un disparo
 		if(this.entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.rasengan == null) {
 			this.rasengan = sakura.disparar();
 			
-			// dependiendo que tecla se apreto por ultima vez se establece la direccion del rasengan
+			// dependiendo la direccion de sakura el rasengan saldra por la misma direccion
 			if (sakura.getDireccion() == 1) {
 				this.rasengan.setDireccion(1);
 			}else if(sakura.getDireccion() == 2) {
