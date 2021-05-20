@@ -24,13 +24,13 @@ public class Manzana {
 		this.imgManzana = Herramientas.cargarImagen("imagenes/pasto.png");
 		this.casas = new Casa[4];
 		//casa arriba
-		casas[0] = new Casa(x, y-(alto/2)+((alto/4)/2), ancho/4, alto/4);
+		casas[0] = new Casa(x, y-(alto/2)+((alto/3)/2), ancho/3, alto/3,0);
 		//casa abajo
-		casas[1] = new Casa(x,y+(alto/2)-((alto/4)/2),ancho/4, alto/4);
+		casas[1] = new Casa(x,y+(alto/2)-((alto/3)/2),ancho/3, alto/3,1);
 		//casa izquieda
-		casas[2] = new Casa(x-(ancho/2)+((ancho/4)/2),y,ancho/4, alto/4);
+		casas[2] = new Casa(x-(ancho/2)+((ancho/3)/2),y,ancho/3, alto/3, 2);
 		//casa derecha
-		casas[3] = new Casa(x+(ancho/2)-((ancho/4)/2),y,ancho/4, alto/4);	
+		casas[3] = new Casa(x+(ancho/2)-((ancho/3)/2),y,ancho/3, alto/3,3);	
 	}
 	
 	public void dibujar(Entorno entorno) {
