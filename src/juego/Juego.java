@@ -332,28 +332,22 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 	
-	private boolean colisionRasengan() {
+	private void colisionRasengan() {
 		if(this.rasengan != null){
 			// colision con manzanas
 			for (int i = 0; i < manzanas.length; i++) {
 				for (int j = 0; j < manzanas[i].length; j++) {
 					if(Rectangulo.colision(this.rasengan.getRect(), manzanas[i][j].getRect())) {
 						this.rasengan = null;
-						return true;
+						return;
 					}
 				}
 			}
 			//colision con limites
 			if(this.rasengan.getX() <= 0 || this.rasengan.getX() >= anchoPantalla || this.rasengan.getY() <= 0 || this.rasengan.getY() >= altoPantalla){
 				this.rasengan = null;
-				return true;
-			}else{
-				return false;
+				return;
 			}
-			
-			
-		}else{
-			return false;
 		}
 		
 	}
