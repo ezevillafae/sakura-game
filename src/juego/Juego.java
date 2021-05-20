@@ -254,10 +254,10 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null && this.rasengan != null) {
 				if(Rectangulo.colision(this.ninjas[i].getRect(), this.rasengan.getRect())) {
-					this.muertes++;
+					sumarMuerte();
 					this.ninjasMuertos[i]=this.ninjas[i];
 					this.ninjas[i] = null;
-					this.rasengan = null;
+					this.rasengan = null; 
 				}
 			}
 		}
@@ -425,10 +425,22 @@ public class Juego extends InterfaceJuego {
 		if(this.casaEntrega != null) {
 			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect())) {
 				this.entregado = true;
-				this.puntaje +=5;
+				sumarPuntos();
 				this.casaEntrega = null;
 			}
 		}
+	}
+	
+	private void sumarMuerte() {
+		this.muertes ++;
+	}
+	
+	private void sumarPuntos() {
+		this.puntaje += 5;
+	}
+	
+	private void restarPuntos() {
+		this.puntaje -= 5;
 	}
 	
 	@SuppressWarnings("unused")
