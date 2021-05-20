@@ -144,7 +144,7 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void dibujarPuntaje() {
-		entorno.cambiarFont("Times New Roman", 20, Color.blue);
+		entorno.cambiarFont("Lucida Console", 20, Color.yellow);
 		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
 		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
 	}
