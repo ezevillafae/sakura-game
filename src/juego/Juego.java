@@ -59,7 +59,7 @@ public class Juego extends InterfaceJuego {
 		iniciarNinjas();
 		this.ninjasMuertos =  new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
 		this.puas = new Puas[aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
-		this.tickPuas = 600;
+		this.tickPuas = 700;
 		this.tickReaparicion = 300;
 		
 		// Inicia el juego!
@@ -68,10 +68,15 @@ public class Juego extends InterfaceJuego {
 	}
 
 	public void tick(){
+		//contadores
 		this.tickPuas--;
 		this.tickReaparicion--;
+		
+		//Se dibuja las manzanas y los puntajes
 		aldea.dibujar(entorno);
 		dibujarPuntaje();
+		
+		
 		elegirCasa();
 		
 		//dibuja la flecha arriba de la casa
@@ -81,9 +86,11 @@ public class Juego extends InterfaceJuego {
 		
 		sakura.dibujar(entorno);
 		
+		
 		if(this.rasengan != null){
 			this.rasengan.dibujar(entorno);
 		}
+		
 		
 		restaurarNinjas();
 		restaurarNinja();
@@ -98,6 +105,7 @@ public class Juego extends InterfaceJuego {
 				this.puas[i].dibujar(entorno);
 			}
 		}
+		quitarPuas();
 
 		movimientoSakura();
 		movimientoRasengan();
@@ -115,8 +123,7 @@ public class Juego extends InterfaceJuego {
 	
 	private void soltarPuas() {
 		if(this.tickPuas == 0) {
-			quitarPuas();
-			this.tickPuas = 600;
+			this.tickPuas = 700;
 			for (int i = 0; i < ninjas.length; i++) {
 				if(this.ninjas[i]!=null) {
 					this.puas[i] = this.ninjas[i].soltarPua();
@@ -126,11 +133,14 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void quitarPuas() {
-		for (int i = 0; i < puas.length; i++) {
-			if(this.puas[i] != null) {
-				this.puas[i] = null;
+		if(this.tickPuas == 150) {
+			for (int i = 0; i < puas.length; i++) {
+				if(this.puas[i] != null) {
+					this.puas[i] = null;
+				}
 			}
 		}
+		
 	}
 	
 	private void dibujarPuntaje() {
