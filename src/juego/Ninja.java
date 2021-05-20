@@ -3,8 +3,6 @@ import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-import java.awt.Color;
-
 public class Ninja {
 	
 	private double x;

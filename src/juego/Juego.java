@@ -19,7 +19,7 @@ public class Juego extends InterfaceJuego {
 	private int altoPantalla; 
 	private Sakura sakura;
 	private Rasengan rasengan;
-	private Ciudad aldea;
+	private Ciudad ciudad;
 	private Manzana[][] manzanas;
 	private Casa casaEntrega;
 	private boolean entregado;
@@ -44,21 +44,21 @@ public class Juego extends InterfaceJuego {
 		this.puntaje = 0;
 		this.muertes = 0;
 		
-		this.aldea = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
-		this.manzanas = aldea.getManzanas();
+		this.ciudad = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
+		this.manzanas = ciudad.getManzanas();
 		
-		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
 		this.rasengan=null;
 
 		this.rand = new Random();
 		this.casaEntrega = null;
-		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha2.png");
+		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.entregado = false;
 		
-		this.ninjas = new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
+		this.ninjas = new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		iniciarNinjas();
-		this.ninjasMuertos =  new Ninja [aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
-		this.puas = new Puas[aldea.getCallesHorizontales()+aldea.getCallesVerticales()];
+		this.ninjasMuertos =  new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
+		this.puas = new Puas[ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		this.tickPuas = 700;
 		this.tickReaparicion = 300;
 		
@@ -73,7 +73,7 @@ public class Juego extends InterfaceJuego {
 		this.tickReaparicion--;
 		
 		//Se dibuja las manzanas y los puntajes
-		aldea.dibujar(entorno);
+		ciudad.dibujar(entorno);
 		dibujarPuntaje();
 		
 		
@@ -81,7 +81,7 @@ public class Juego extends InterfaceJuego {
 		
 		//dibuja la flecha arriba de la casa
 		if(this.casaEntrega != null) {
-			entorno.dibujarImagen(this.imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-40, 0, 1);
+			entorno.dibujarImagen(this.imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-30, 0, 0.77);
 		}
 		
 		sakura.dibujar(entorno);
@@ -211,10 +211,10 @@ public class Juego extends InterfaceJuego {
 		int cont=1;
 		int cont2=1;
 		for (int i = 0; i < (ninjas.length)/2; i++) {// crea los ninjas y los ubica en la esquina superior en el centro de las calles
-				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (aldea.getAnchoCalle()*cont/2),
+				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (ciudad.getAnchoCalle()*cont/2),
 				 						20, 
-				 						aldea.getAnchoCalle()/2, 
-				 						this.aldea.getAnchoCalle()/2);
+				 						ciudad.getAnchoCalle()/2, 
+				 						this.ciudad.getAnchoCalle()/2);
 				cont+=2;
 				cont2++;
 		}
@@ -222,8 +222,8 @@ public class Juego extends InterfaceJuego {
 		cont2=1;
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
 				this.ninjas[i]=new Ninja(40, 
-										(manzanas[0][0].getAlto()*(cont2))+ (aldea.getAnchoCalle()*cont/2), 
-										aldea.getAnchoCalle()/2, this.aldea.getAnchoCalle()/2);
+										(manzanas[0][0].getAlto()*(cont2))+ (ciudad.getAnchoCalle()*cont/2), 
+										ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
 				cont+=2;
 				cont2++;
 		}
