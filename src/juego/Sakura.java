@@ -1,8 +1,10 @@
 package juego;
+import java.awt.Image;
 
 import java.awt.Color;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Sakura {
 	private double x;
@@ -10,6 +12,7 @@ public class Sakura {
 	private double ancho;
 	private double alto;
 	private int direccion;
+	private Image sakuraImg;
 	
 	
 	public Sakura(double x, double y, double ancho, double alto) {
@@ -17,10 +20,12 @@ public class Sakura {
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.sakuraImg=Herramientas.cargarImagen("imagenes/sakura.png");
 	}
 	
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
+		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
+		entorno.dibujarImagen(sakuraImg, x, y, 0, 1);
 	}
 	
 	public Rasengan disparar() {
