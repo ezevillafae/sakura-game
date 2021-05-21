@@ -26,10 +26,12 @@ public class Juego extends InterfaceJuego {
 	private Puas [] puas;
 	private Random rand;
 	private Image imgFlecha;
+	private Image fdoPantalla;
 	private int puntaje;
 	private int muertes;
 	private int tickPuas;
 	private int tickReaparicion;
+	private boolean juegoTerminado;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -52,6 +54,7 @@ public class Juego extends InterfaceJuego {
 		this.casaEntrega = null;
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.entregado = false;
+		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla1.png");
 		
 		this.ninjas = new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		iniciarNinjas();
@@ -59,12 +62,21 @@ public class Juego extends InterfaceJuego {
 		this.puas = new Puas[ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		this.tickPuas = 700;
 		this.tickReaparicion = 300;
+		this.juegoTerminado=true;
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
 	}
 
 	public void tick(){
+		if (juegoTerminado)
+			menu();
+		else
+			pantallaJuego();
+	
+	}
+
+	private void pantallaJuego(){
 		//contadores
 		this.tickPuas--;
 		this.tickReaparicion--;
@@ -111,9 +123,14 @@ public class Juego extends InterfaceJuego {
 		colisionSakuraPuas();
 
 		sakuraEntrego();
-	
 	}
-	
+
+	private void menu(){
+		entorno.dibujarImagen(fdoPantalla, anchoPantalla/2, altoPantalla/2, 0,1);
+		if(entorno.estaPresionada(entorno.TECLA_ENTER))
+			this.juegoTerminado=false;
+		
+	}
 	
 	private void soltarPuas() {
 		if(this.tickPuas == 0) {
