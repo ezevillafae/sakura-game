@@ -71,18 +71,45 @@ public class Juego extends InterfaceJuego {
 			menu();
 		else
 			pantallaJuego();
-	
 	}
 
 	private void pantallaJuego(){
+		dibujarEntidades();
+		
 		//contadores
 		this.tickPuas--;
 		
-		//Se dibuja las manzanas y los puntajes
+		elegirCasa();
+		
+		soltarPuas();
+		
+		
+		if(this.tickPuas == 150) {
+			quitarPuas();
+		}
+		
+		
+		restaurarNinjas();
+		restaurarNinja();
+		
+		
+		movimientoSakura();
+		movimientoRasengan();
+		movimientoNinjas(); 
+		
+		//colisiones 
+		colisionSakuraNinjas();
+		colisionRasengan();
+		colisionNinjaRasengan();
+		colisionSakuraPuas();
+
+		sakuraEntrego();
+	}
+
+	private void dibujarEntidades() {
+		
 		ciudad.dibujar(entorno);
 		dibujarPuntaje();
-		
-		elegirCasa();
 		
 		//dibuja la flecha arriba de la casa
 		if(this.casaEntrega != null) {
@@ -95,39 +122,18 @@ public class Juego extends InterfaceJuego {
 			this.rasengan.dibujar(entorno);
 		}
 		
-		
-		
-		soltarPuas();
 		for (int i = 0; i < puas.length; i++) {
 			if(this.puas[i] != null) {
 				this.puas[i].dibujar(entorno);
 			}
 		}
 		
-		if(this.tickPuas == 150) {
-			quitarPuas();
-		}
-		
-		
-		restaurarNinjas();
-		restaurarNinja();
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i]!=null)
 				ninjas[i].dibujar(entorno);
 		}
-
-		movimientoSakura();
-		movimientoRasengan();
-		movimientoNinjas(); 
-		
-		colisionSakuraNinjas();
-		colisionRasengan();
-		colisionNinjaRasengan();
-		colisionSakuraPuas();
-
-		sakuraEntrego();
 	}
-
+	
 	private void menu(){
 		entorno.dibujarImagen(fdoPantalla, anchoPantalla/2, altoPantalla/2, 0,1);
 		if(entorno.estaPresionada(entorno.TECLA_ENTER))
