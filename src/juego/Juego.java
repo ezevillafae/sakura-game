@@ -164,53 +164,58 @@ public class Juego extends InterfaceJuego {
 		if(this.casaEntrega == null) {
 			int fila = rand.nextInt(manzanas.length);
 			int columna = rand.nextInt(manzanas[0].length);
-			Manzana manzanaElegida = manzanas[fila][columna];
+			Manzana manzanaElegida = manzanas[fila][columna]; // se elige una manzana aleatoriamente
 			
 			
-			if(fila == 0) {
-				if(columna == 0) {
-					int casa = rand.nextInt(3)+1;
-					if(casa != 2) {
-						this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige la casa de la derecha y abajo
-					}
-				}else if(columna == manzanas[0].length-1) {
-					int casa = rand.nextInt(2)+1;
-					this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige la casa de abajo y la izquierda
+			/* casa 0 = arriba
+			 * casa 1 = abajo
+			 * casa 2 = izquierda
+			 * casa 3 = derecha
+			 */
+			
+			if(fila == 0) { // manzanas superiores
+				if(columna == 0) { // manzana superior izquierda
+					int [] numeros = {1,3}; // solo se elije la casa 1 (abajo) y casa 3 (derecha)
+					int casa = rand.nextInt(2); // posicion 0 o 1
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]];
+					
+				}else if(columna == manzanas[0].length-1) { // manzana superior derecha
+					int [] numeros = {1,2}; 
+					int casa = rand.nextInt(2);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // solo elige la casa de abajo y la izquierda
 				}else {
-					int casa = rand.nextInt(3)+1;
-					this.casaEntrega = manzanaElegida.getCasas()[casa]; // no elige las casas de arriba
+					int [] numeros = {1,2,3}; 
+					int casa = rand.nextInt(3);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // no elige las casas de arriba
 				}
 	
-			}else if(fila == manzanas.length-1) { // fila inferior
+			}else if(fila == manzanas.length-1) { // manzanas inferiores
 				if(columna == 0) {
-					int casa = rand.nextInt(3)+1;
-					if(casa != 1 && casa != 2) {
-						this.casaEntrega = manzanaElegida.getCasas()[casa]; // solo elige las casas de la derecha y arriba
-					}
+					int [] numeros = {0,3}; 
+					int casa = rand.nextInt(2);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // solo elige las casas de la derecha y arriba
 				}else if(columna == manzanas[0].length-1) {
-					int casa = rand.nextInt(3); 
-					if(casa != 1) {
-						this.casaEntrega = manzanaElegida.getCasas()[casa];
-					}
+					int [] numeros = {0,2}; 
+					int casa = rand.nextInt(2); 
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; //solo elige las casas de la izquierda y arriba
 				}else {
-					int casa = rand.nextInt(4);
-					if(casa != 1) {
-						this.casaEntrega = manzanaElegida.getCasas()[casa];
-					}
-					
+					int [] numeros = {0,2,3}; 
+					int casa = rand.nextInt(3);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; //no elige las casas de abajo
 				}
 			}else { // si no elige la fila superior y la fila inferior
-				if(columna == 0) {
-					int casa = rand.nextInt(4);
-					if(casa != 2) {
-						this.casaEntrega = manzanaElegida.getCasas()[casa];
-					}
-				}else if(columna == manzanas[0].length-1) {
+				if(columna == 0) { 
+					int [] numeros = {0,1,3}; 
 					int casa = rand.nextInt(3);
-					this.casaEntrega = manzanaElegida.getCasas()[casa];
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // no elige las casas de la izquierda
+				}else if(columna == manzanas[0].length-1) {
+					int [] numeros = {0,1,2}; 
+					int casa = rand.nextInt(3);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]];
 				}else {
+					int [] numeros = {0,1,2,3}; 
 					int casa = rand.nextInt(4);
-					this.casaEntrega = manzanaElegida.getCasas()[casa];
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]];
 				}	
 			}
 		}
@@ -444,6 +449,8 @@ public class Juego extends InterfaceJuego {
 	
 	private void resetarJuego() {
 		this.juegoTerminado = true;
+		this.rasengan = null;
+		this.casaEntrega = null;
 		quitarPuas();
 		iniciarNinjas();
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
