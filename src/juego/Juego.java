@@ -30,7 +30,6 @@ public class Juego extends InterfaceJuego {
 	private int puntaje;
 	private int muertes;
 	private int tickPuas;
-	private int tickReaparicion;
 	private boolean juegoTerminado;
 	
 	Juego(){
@@ -61,7 +60,6 @@ public class Juego extends InterfaceJuego {
 		this.ninjasMuertos =  new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		this.puas = new Puas[ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		this.tickPuas = 700;
-		this.tickReaparicion = 300;
 		this.juegoTerminado=true;
 		
 		// Inicia el juego!
@@ -79,7 +77,6 @@ public class Juego extends InterfaceJuego {
 	private void pantallaJuego(){
 		//contadores
 		this.tickPuas--;
-		this.tickReaparicion--;
 		
 		//Se dibuja las manzanas y los puntajes
 		ciudad.dibujar(entorno);
@@ -301,24 +298,20 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	public void restaurarNinja() {
-		if(this.tickReaparicion == 0) {
-			this.tickReaparicion = 600;
 			for (int i = 0; i < ninjasMuertos.length/2; i++) {
 				if(this.ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setY(-40);
+					this.ninjasMuertos[i].setY(-200); //para que tarden en aparecer
 					this.ninjas[i] = this.ninjasMuertos[i];
 					return;
 				}
 			}
 			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
 				if(ninjasMuertos[i] != null && ninjas[i]==null) {
-					this.ninjasMuertos[i].setX(-40);
+					this.ninjasMuertos[i].setX(-200); //para que tarden en aparecer
 					this.ninjas[i] = this.ninjasMuertos[i];
 					return;
 				}
 			}
-		}
-		
 	}
 	
 	private void movimientoRasengan() {
