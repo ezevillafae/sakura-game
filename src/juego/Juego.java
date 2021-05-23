@@ -54,7 +54,7 @@ public class Juego extends InterfaceJuego {
 		this.casaEntrega = null;
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.entregado = false;
-		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla1.png");
+		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla.png");
 		
 		this.ninjas = new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
 		iniciarNinjas();
@@ -98,12 +98,7 @@ public class Juego extends InterfaceJuego {
 			this.rasengan.dibujar(entorno);
 		}
 		
-		restaurarNinjas();
-		restaurarNinja();
-		for (int i = 0; i < ninjas.length; i++) {
-			if(ninjas[i]!=null)
-				ninjas[i].dibujar(entorno);
-		}
+		
 		
 		soltarPuas();
 		for (int i = 0; i < puas.length; i++) {
@@ -112,6 +107,13 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 		quitarPuas();
+		
+		restaurarNinjas();
+		restaurarNinja();
+		for (int i = 0; i < ninjas.length; i++) {
+			if(ninjas[i]!=null)
+				ninjas[i].dibujar(entorno);
+		}
 
 		movimientoSakura();
 		movimientoRasengan();
