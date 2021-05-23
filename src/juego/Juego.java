@@ -103,7 +103,11 @@ public class Juego extends InterfaceJuego {
 				this.puas[i].dibujar(entorno);
 			}
 		}
-		quitarPuas();
+		
+		if(this.tickPuas == 150) {
+			quitarPuas();
+		}
+		
 		
 		restaurarNinjas();
 		restaurarNinja();
@@ -143,14 +147,11 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void quitarPuas() {
-		if(this.tickPuas == 150) {
 			for (int i = 0; i < puas.length; i++) {
 				if(this.puas[i] != null) {
 					this.puas[i] = null;
 				}
 			}
-		}
-		
 	}
 	
 	private void dibujarPuntaje() {
@@ -210,9 +211,7 @@ public class Juego extends InterfaceJuego {
 				}else {
 					int casa = rand.nextInt(4);
 					this.casaEntrega = manzanaElegida.getCasas()[casa];
-				}
-				
-				
+				}	
 			}
 		}
 	}	
@@ -405,7 +404,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < ninjas.length; i++) {
 			if(ninjas[i] != null) {
 				if(Rectangulo.colision(this.ninjas[i].getRect(), this.sakura.getRect())) {
-					entorno.dispose();
+					resetarJuego();
 				}
 			}
 		}
@@ -415,7 +414,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < puas.length; i++) {
 			if(this.puas[i] != null) {
 				if(Rectangulo.colision(this.puas[i].getRect(), this.sakura.getRect())) {
-					this.entorno.dispose();
+					resetarJuego();
 				}
 			}
 		}
@@ -442,6 +441,16 @@ public class Juego extends InterfaceJuego {
 	private void restarPuntos() {
 		this.puntaje -= 5;
 	}
+	
+	private void resetarJuego() {
+		this.juegoTerminado = true;
+		quitarPuas();
+		iniciarNinjas();
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
+		this.puntaje = 0;
+		this.muertes = 0;
+	}
+	
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
