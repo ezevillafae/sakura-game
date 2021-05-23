@@ -32,7 +32,7 @@ public class Casa {
 				this.imgCasa=Herramientas.cargarImagen("imagenes/casaDerecha.png");
 	}
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarImagen(imgCasa, x, y, 0,1.0);
+		entorno.dibujarImagen(imgCasa, x, y, 0,0.8);
 	}
 	
 	public double getX() {
