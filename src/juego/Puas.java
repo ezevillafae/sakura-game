@@ -1,6 +1,5 @@
 package juego;
 
-import java.awt.Color;
 import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -24,7 +23,6 @@ public class Puas {
 	}
 	
 	public void dibujar(Entorno entorno) {
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.YELLOW);
 		entorno.dibujarImagen(puasImg, x, y, 0,1);
 	}
 

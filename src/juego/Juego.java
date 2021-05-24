@@ -319,7 +319,7 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 	
-	public void restaurarNinja() {
+	private void restaurarNinja() {
 			for (int i = 0; i < ninjasMuertos.length/2; i++) {
 				if(this.ninjasMuertos[i] != null && ninjas[i]==null) {
 					this.ninjasMuertos[i].setY(-200); //para que tarden en aparecer

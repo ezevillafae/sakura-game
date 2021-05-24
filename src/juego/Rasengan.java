@@ -1,8 +1,6 @@
 package juego;
 import java.awt.Image;
 
-import java.awt.Color;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -27,7 +25,6 @@ public class Rasengan {
 	
 	public void dibujar(Entorno entorno) {
 		entorno.dibujarImagen(rasenganImg, x, y, 0,0.05);
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);
 	}
 	
 	public void moverse() {
