@@ -47,7 +47,7 @@ public class Juego extends InterfaceJuego {
 		this.ciudad = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.manzanas = ciudad.getManzanas();
 		
-		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2+10);
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2+13);
 		this.rasengan=null;
 
 		this.rand = new Random();
