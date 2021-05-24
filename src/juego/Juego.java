@@ -54,7 +54,7 @@ public class Juego extends InterfaceJuego {
 		this.casaEntrega = null;
 		this.ikebana = null;
 		this.floreria = manzanas[0][manzanas.length-1].getCasas()[1]; // la floreria siempre es la casa de abajo de la manzana superior derecha
-		this.floreria.setImgCasa(Herramientas.cargarImagen("imagenes/floreria.png"));
+		this.floreria.setImgCasa(Herramientas.cargarImagen("imagenes/floreria.png")); //se le cambia la imagen a la floreria
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla.png");
 		
@@ -123,6 +123,8 @@ public class Juego extends InterfaceJuego {
 			entorno.dibujarImagen(this.imgFlecha, this.casaEntrega.getX(), this.casaEntrega.getY()-30, 0, 0.77);
 		}
 		
+		señalizarFloreria();
+		
 		sakura.dibujar(entorno);
 		
 		if(this.ikebana != null) {
@@ -178,7 +180,7 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void elegirCasa() {
-		if(this.casaEntrega == null) {
+		if(this.casaEntrega == null && this.ikebana != null) {
 			int fila = rand.nextInt(manzanas.length);
 			int columna = rand.nextInt(manzanas[0].length);
 			Manzana manzanaElegida = manzanas[fila][columna]; // se elige una manzana aleatoriamente
@@ -237,6 +239,12 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 	}	
+	
+	private void señalizarFloreria() {
+		if(this.ikebana == null) {
+			entorno.dibujarImagen(imgFlecha, this.floreria.getX(), this.floreria.getY()-40, 0, 0.77);
+		}
+	}
 	
 	private void iniciarNinjas(){
 		int cont=1;
@@ -485,7 +493,7 @@ public class Juego extends InterfaceJuego {
 	private void movimientoIkebana(){
 		if (this.ikebana!=null){
 			this.ikebana.setX(this.sakura.getX());
-			this.ikebana.setY(this.sakura.getY());
+			this.ikebana.setY(this.sakura.getY()+5);
 		}
 	}
 	

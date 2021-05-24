@@ -1,8 +1,10 @@
 package juego;
 
 import java.awt.Color;
+import java.awt.Image;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Ikebana {
 	
@@ -10,12 +12,14 @@ public class Ikebana {
 	private double y;
 	private double ancho;
 	private double alto;
+	private Image imgIkebana;
 	
 	public Ikebana(double x, double y, double ancho, double alto) {
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.imgIkebana = Herramientas.cargarImagen("imagenes/ikebana.png");
 	}
 
 	public double getX() {
@@ -43,7 +47,7 @@ public class Ikebana {
 	}
 
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
+		entorno.dibujarImagen(imgIkebana, x, y, 0, 0.5);
 	}
 	
 	
