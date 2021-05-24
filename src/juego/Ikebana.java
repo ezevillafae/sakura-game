@@ -30,6 +30,14 @@ public class Ikebana {
 		return ancho;
 	}
 
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
 	public double getAlto() {
 		return alto;
 	}

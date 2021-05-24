@@ -99,7 +99,8 @@ public class Juego extends InterfaceJuego {
 		
 		movimientoSakura();
 		movimientoRasengan();
-		movimientoNinjas(); 
+		movimientoNinjas();
+		movimientoIkebana();
 		
 		//colisiones 
 		colisionSakuraNinjas();
@@ -477,6 +478,13 @@ public class Juego extends InterfaceJuego {
 	private void colisionSakuraFloreria() {
 		if(this.ikebana == null && Rectangulo.colision(this.sakura.getRect(), this.floreria.getRect())) { // si no existe un ikebana y sakura colisiona con la floreria
 			this.ikebana = new Ikebana(this.sakura.getX(), this.sakura.getY(), 10, 10); // se crea un ikebana con las x e y de sakura
+		}
+	}
+
+	private void movimientoIkebana(){
+		if (this.ikebana!=null){
+			this.ikebana.setX(this.sakura.getX());
+			this.ikebana.setY(this.sakura.getY());
 		}
 	}
 	
