@@ -26,7 +26,6 @@ public class Ninja {
 	}
 
     public void dibujar(Entorno entorno) {
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.MAGENTA);
         entorno.dibujarImagen(imgNinja, x, y, 0,0.70);
 
 	}

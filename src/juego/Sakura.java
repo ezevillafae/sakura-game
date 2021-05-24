@@ -22,7 +22,6 @@ public class Sakura {
 	}
 	
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
 		entorno.dibujarImagen(sakuraImg, x, y, 0, 1);
 	}
 	
