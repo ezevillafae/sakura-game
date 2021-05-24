@@ -196,9 +196,9 @@ public class Juego extends InterfaceJuego {
 					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]];
 					
 				}else if(columna == manzanas[0].length-1) { // manzana superior derecha
-					int [] numeros = {1,2}; 
-					int casa = rand.nextInt(2);
-					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // solo elige la casa de abajo y la izquierda
+					int [] numeros = {1}; 
+					int casa = rand.nextInt(1);
+					this.casaEntrega = manzanaElegida.getCasas()[numeros[casa]]; // solo elige la casa de la izquierda (no elige floreria)
 				}else {
 					int [] numeros = {1,2,3}; 
 					int casa = rand.nextInt(3);
@@ -467,6 +467,7 @@ public class Juego extends InterfaceJuego {
 		this.juegoTerminado = true;
 		this.rasengan = null;
 		this.casaEntrega = null;
+		this.ikebana = null;
 		quitarPuas();
 		iniciarNinjas();
 		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
