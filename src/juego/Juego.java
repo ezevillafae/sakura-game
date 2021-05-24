@@ -54,6 +54,7 @@ public class Juego extends InterfaceJuego {
 		this.casaEntrega = null;
 		this.ikebana = null;
 		this.floreria = manzanas[0][manzanas.length-1].getCasas()[1]; // la floreria siempre es la casa de abajo de la manzana superior derecha
+		this.floreria.setImgCasa(Herramientas.cargarImagen("imagenes/floreria.png"));
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla.png");
 		

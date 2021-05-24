@@ -35,6 +35,10 @@ public class Casa {
 		entorno.dibujarImagen(imgCasa, x, y, 0,0.8);
 	}
 	
+	public void setImgCasa(Image image) {
+		this.imgCasa = image;
+	}
+	
 	public double getX() {
 		return x;
 	}
