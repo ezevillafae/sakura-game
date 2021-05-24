@@ -56,7 +56,7 @@ public class Ciudad {
 		return this.cantManzanas;
 	}
 
-	public Manzana[][] getManzanas() {
+	public Manzana[][] getManzanas() {// devuelve el arreglo de manzanas
 		return manzanas;
 	}
 	public double getAnchoCalle() {

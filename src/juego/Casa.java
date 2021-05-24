@@ -49,7 +49,7 @@ public class Casa {
 	}
 	
 	public Rectangulo getRect() {
-		return new Rectangulo(x, y, ancho+20, alto+20);
+		return new Rectangulo(x, y, ancho+5, alto+5);//hit box de entrega del ikebana o se entiende como la colision de sakura con la casa
 	}
 	
 	

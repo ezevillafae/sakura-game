@@ -56,7 +56,7 @@ public class Manzana {
 		return alto;
 	}
 
-	public Casa[] getCasas() {
+	public Casa[] getCasas() { //devuelve las casas de la manzana
 		return casas;
 	}
 	

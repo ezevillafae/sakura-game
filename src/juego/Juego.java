@@ -20,7 +20,6 @@ public class Juego extends InterfaceJuego {
 	private Ciudad ciudad;
 	private Manzana[][] manzanas;
 	private Casa casaEntrega;
-	private boolean entregado;
 	private Ninja [] ninjas;
 	private Ninja [] ninjasMuertos;
 	private Puas [] puas;
@@ -56,7 +55,6 @@ public class Juego extends InterfaceJuego {
 		this.ikebana = null;
 		this.floreria = manzanas[0][manzanas.length-1].getCasas()[1]; // la floreria siempre es la casa de abajo de la manzana superior derecha
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
-		this.entregado = false;
 		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla.png");
 		
 		this.ninjas = new Ninja [ciudad.getCallesHorizontales()+ciudad.getCallesVerticales()];
@@ -446,7 +444,6 @@ public class Juego extends InterfaceJuego {
 	private void sakuraEntrego() {
 		if(this.casaEntrega != null) {
 			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect()) && this.ikebana != null) {
-				this.entregado = true;
 				this.ikebana = null;
 				sumarPuntos();
 				this.casaEntrega = null;
