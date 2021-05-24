@@ -27,7 +27,7 @@ public class Sakura {
 	}
 	
 	public Rasengan disparar() {
-		return new Rasengan(x,y,5,5);
+		return new Rasengan(x,y,10,10);
 	}
 	
 	public void moverse() {
