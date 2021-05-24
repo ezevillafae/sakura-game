@@ -468,10 +468,6 @@ public class Juego extends InterfaceJuego {
 		this.puntaje += 5;
 	}
 	
-	private void restarPuntos() {
-		this.puntaje -= 5;
-	}
-	
 	private void resetarJuego() {
 		this.juegoTerminado = true;
 		this.rasengan = null;
