@@ -47,7 +47,7 @@ public class Juego extends InterfaceJuego {
 		this.ciudad = new Ciudad(anchoPantalla,altoPantalla,3,3,40);
 		this.manzanas = ciudad.getManzanas();
 		
-		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2+13);
+		this.sakura = new Sakura(anchoPantalla/2, altoPantalla/2, ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
 		this.rasengan=null;
 
 		this.rand = new Random();
@@ -245,7 +245,7 @@ public class Juego extends InterfaceJuego {
 				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (ciudad.getAnchoCalle()*cont/2),
 				 						20, 
 				 						ciudad.getAnchoCalle()/2, 
-				 						this.ciudad.getAnchoCalle(),1);
+				 						this.ciudad.getAnchoCalle()/2,1);
 				cont+=2;
 				cont2++;
 		}
@@ -254,7 +254,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
 				this.ninjas[i]=new Ninja(40, 
 										(manzanas[0][0].getAlto()*(cont2))+ (ciudad.getAnchoCalle()*cont/2), 
-										ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle(),1);
+										ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2,1);
 				cont+=2;
 				cont2++;
 		}

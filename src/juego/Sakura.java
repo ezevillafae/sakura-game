@@ -1,6 +1,6 @@
 package juego;
 import java.awt.Image;
-
+import java.awt.Color;
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -22,12 +22,12 @@ public class Sakura {
 	}
 	
 	public void dibujar(Entorno entorno) {
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
+		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
 		entorno.dibujarImagen(sakuraImg, x, y, 0, 1);
 	}
 	
 	public Rasengan disparar() {
-		return new Rasengan(x,y,10,10);
+		return new Rasengan(x,y,15,15);
 	}
 	
 	public void moverse() {

@@ -81,6 +81,6 @@ public class Ninja {
         this.velocidad=velocidad;
     }
     public Rectangulo getRect() {
-		return new Rectangulo(x, y, ancho, alto);
+		return new Rectangulo(x, y, ancho, alto*2);
 	}
 }
