@@ -10,12 +10,14 @@ public class Ninja {
 	private double ancho;
 	private double alto;
     private Image imgNinja;
+    private double velocidad;
 
-	public Ninja(double x, double y, double ancho, double alto) {
+	public Ninja(double x, double y, double ancho, double alto, double velocidad) {
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+        this.velocidad=velocidad;
         this.imgNinja=Herramientas.cargarImagen("imagenes/imgninja.png");
 	}
 	
@@ -29,19 +31,19 @@ public class Ninja {
 
 	}
     public void moverDerecha() {
-		this.x+= 1; 
+		this.x+= this.velocidad; 
 	}
 	
 	public void moverIzquierda() {
-		this.x-=1;
+		this.x-=this.velocidad;
 	}
 	
 	public void moverArriba() {
-		this.y -= 1;
+		this.y -= this.velocidad;
 	}
 	
 	public void moverAbajo() {
-		this.y +=1;
+		this.y +=this.velocidad;
 	}
 
     public double getX() {
@@ -74,6 +76,9 @@ public class Ninja {
 
     public void setAlto(double alto) {
         this.alto = alto;
+    }
+    public void setVelocidad(double velocidad){
+        this.velocidad=velocidad;
     }
     public Rectangulo getRect() {
 		return new Rectangulo(x, y, ancho, alto);

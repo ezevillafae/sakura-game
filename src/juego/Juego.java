@@ -110,6 +110,8 @@ public class Juego extends InterfaceJuego {
 		colisionSakuraFloreria();
 
 		sakuraEntrego();
+
+		cambiarVelocidadNinjas();
 	}
 
 	private void dibujarEntidades() {
@@ -152,7 +154,7 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void soltarPuas() {
-		if(this.tickPuas == 0) {
+		if(this.tickPuas <= 0 && this.puntaje>=20) {
 			this.tickPuas = 700;
 			for (int i = 0; i < ninjas.length; i++) {
 				if(this.ninjas[i]!=null) {
@@ -244,7 +246,7 @@ public class Juego extends InterfaceJuego {
 				this.ninjas[i]=new Ninja((manzanas[0][0].getAncho()*(cont2))+ (ciudad.getAnchoCalle()*cont/2),
 				 						20, 
 				 						ciudad.getAnchoCalle()/2, 
-				 						this.ciudad.getAnchoCalle()/2);
+				 						this.ciudad.getAnchoCalle()/2,1);
 				cont+=2;
 				cont2++;
 		}
@@ -253,7 +255,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
 				this.ninjas[i]=new Ninja(40, 
 										(manzanas[0][0].getAlto()*(cont2))+ (ciudad.getAnchoCalle()*cont/2), 
-										ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2);
+										ciudad.getAnchoCalle()/2, this.ciudad.getAnchoCalle()/2,1);
 				cont+=2;
 				cont2++;
 		}
@@ -263,7 +265,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < (ninjas.length)/2; i++) {
 			if(ninjas[i]!=null) {
 				ninjas[i].moverAbajo();
-				if (ninjas[i].getY()==altoPantalla+ninjas[i].getAlto()) {
+				if (ninjas[i].getY()>=altoPantalla+ninjas[i].getAlto()) {
 					ninjas[i].setY(0);
 					ninjas[i].moverAbajo();
 				}
@@ -272,7 +274,7 @@ public class Juego extends InterfaceJuego {
 		for (int i = (ninjas.length)/2; i < ninjas.length; i++) {
 			if(ninjas[i]!=null) {
 				ninjas[i].moverDerecha();
-				if (ninjas[i].getX()==anchoPantalla+ninjas[i].getAncho()) {
+				if (ninjas[i].getX()>=anchoPantalla+ninjas[i].getAncho()) {
 					ninjas[i].setX(0);
 					ninjas[i].moverDerecha();
 				}
@@ -488,6 +490,16 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 	
+	private void cambiarVelocidadNinjas(){
+		if (this.puntaje==35) {
+			for (int i = 0; i < ninjas.length; i++) {
+				if (this.ninjas[i]!=null) {
+					this.ninjas[i].setVelocidad(2);
+				}
+			}
+		}
+	}
+
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
