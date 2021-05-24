@@ -31,6 +31,8 @@ public class Juego extends InterfaceJuego {
 	private int muertes;
 	private int tickPuas;
 	private boolean juegoTerminado;
+	private Casa floreria;
+	private Ikebana ikebana;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -51,6 +53,8 @@ public class Juego extends InterfaceJuego {
 
 		this.rand = new Random();
 		this.casaEntrega = null;
+		this.ikebana = null;
+		this.floreria = manzanas[0][manzanas.length-1].getCasas()[1]; // la floreria siempre es la casa de abajo de la manzana superior derecha
 		this.imgFlecha = Herramientas.cargarImagen("imagenes/flecha.png");
 		this.entregado = false;
 		this.fdoPantalla=Herramientas.cargarImagen("imagenes/fondopantalla.png");
@@ -102,6 +106,7 @@ public class Juego extends InterfaceJuego {
 		colisionRasengan();
 		colisionNinjaRasengan();
 		colisionSakuraPuas();
+		colisionSakuraFloreria();
 
 		sakuraEntrego();
 	}
@@ -117,6 +122,10 @@ public class Juego extends InterfaceJuego {
 		}
 		
 		sakura.dibujar(entorno);
+		
+		if(this.ikebana != null) {
+			this.ikebana.dibujar(entorno);
+		}
 		
 		if(this.rasengan != null){
 			this.rasengan.dibujar(entorno);
@@ -433,8 +442,9 @@ public class Juego extends InterfaceJuego {
 	
 	private void sakuraEntrego() {
 		if(this.casaEntrega != null) {
-			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect())) {
+			if(Rectangulo.colision(this.sakura.getRect(), this.casaEntrega.getRect()) && this.ikebana != null) {
 				this.entregado = true;
+				this.ikebana = null;
 				sumarPuntos();
 				this.casaEntrega = null;
 			}
@@ -464,6 +474,11 @@ public class Juego extends InterfaceJuego {
 		this.muertes = 0;
 	}
 	
+	private void colisionSakuraFloreria() {
+		if(this.ikebana == null && Rectangulo.colision(this.sakura.getRect(), this.floreria.getRect())) { // si no existe un ikebana y sakura colisiona con la floreria
+			this.ikebana = new Ikebana(this.sakura.getX(), this.sakura.getY(), 10, 10); // se crea un ikebana con las x e y de sakura
+		}
+	}
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
