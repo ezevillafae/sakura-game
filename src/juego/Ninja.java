@@ -1,4 +1,5 @@
 package juego;
+
 import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -65,21 +66,16 @@ public class Ninja {
         return ancho;
     }
 
-    public void setAncho(double ancho) {
-        this.ancho = ancho;
-    }
-
     public double getAlto() {
         return alto;
     }
 
-    public void setAlto(double alto) {
-        this.alto = alto;
-    }
     public void setVelocidad(double velocidad){
         this.velocidad=velocidad;
     }
+
     public Rectangulo getRect() {
 		return new Rectangulo(x, y, ancho, alto*2);
 	}
+    
 }

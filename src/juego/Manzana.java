@@ -13,7 +13,6 @@ public class Manzana {
 	private Casa[] casas;
 	private Image imgManzana;
 	
-	
 	public Manzana(double x, double y, double ancho, double alto) {
 		this.x = x;
 		this.y = y;
@@ -33,19 +32,10 @@ public class Manzana {
 	
 	public void dibujar(Entorno entorno) {
 		entorno.dibujarImagen(imgManzana, x, y, 0, 1);
-		//entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);
 		casas[0].dibujar(entorno);
 		casas[1].dibujar(entorno);
 		casas[2].dibujar(entorno);
 		casas[3].dibujar(entorno);
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
 	}
 
 	public double getAncho() {
@@ -56,7 +46,7 @@ public class Manzana {
 		return alto;
 	}
 
-	public Casa[] getCasas() { //devuelve las casas de la manzana
+	public Casa[] getCasas() { 
 		return casas;
 	}
 	

@@ -1,4 +1,5 @@
 package juego;
+
 import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -11,10 +12,7 @@ public class Ciudad {
 	private int callesHorizontales;
 	private Manzana[][] manzanas;
 	private double anchoCalle;
-	private int cantManzanas;
-	private Image calles;
-	
-
+	private Image imgCalles;
 	
 	public Ciudad(double ancho, double alto,int callesVerticales, int callesHorizontales,double anchoCalle) {
 		this.anchoCalle = anchoCalle;
@@ -23,13 +21,13 @@ public class Ciudad {
 		this.callesHorizontales = callesHorizontales;
 		this.callesVerticales = callesVerticales;
 		this.manzanas = new Manzana[callesHorizontales+1][callesVerticales+1];
-		this.calles=Herramientas.cargarImagen("imagenes/calles.png");
+		this.imgCalles=Herramientas.cargarImagen("imagenes/calles.png");
 		crearManzanas();
 	}
 	
 	public void dibujar(Entorno entorno) {
-		entorno.dibujarImagen(calles, ancho/2, alto/2, 0,1);
-		for (int i = 0; i < manzanas.length; i++) {
+		entorno.dibujarImagen(imgCalles, ancho/2, alto/2, 0,1);
+		for (int i = 0; i < manzanas.length; i++) { //se dibujan las manzanas
 			for (int j = 0; j < manzanas[i].length; j++) {
 				manzanas[i][j].dibujar(entorno);
 			}
@@ -51,12 +49,8 @@ public class Ciudad {
 			y += altoManzana + anchoCalle;
 		}
 	}
-	
-	public int getCantCasas() {
-		return this.cantManzanas;
-	}
 
-	public Manzana[][] getManzanas() {// devuelve el arreglo de manzanas
+	public Manzana[][] getManzanas() {
 		return manzanas;
 	}
 	public double getAnchoCalle() {
@@ -70,8 +64,5 @@ public class Ciudad {
 	public int getCallesHorizontales() {
 		return callesHorizontales;
 	}
-
-	
-	
 
 }

@@ -1,6 +1,6 @@
 package juego;
-import java.awt.Image;
 
+import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -13,13 +13,13 @@ public class Rasengan {
 	private int direccion;
 	private Image rasenganImg;
 	
-	public Rasengan(double x, double y, double ancho, double alto) {
+	public Rasengan(double x, double y, double ancho, double alto, int direccion) {
 		
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
-		this.direccion = 1;
+		this.direccion = direccion;
 		this.rasenganImg= Herramientas.cargarImagen("imagenes/rasengan.png");
 	}
 	
@@ -39,24 +39,20 @@ public class Rasengan {
 		}
 	}
 	
-	public void setDireccion(int direccion) {
-		this.direccion = direccion;
+	private void moverDerecha() {
+		this.x+=3; 
 	}
 	
-	public void moverDerecha() {
-		this.x+= 3; 
-	}
-	
-	public void moverIzquierda() {
+	private void moverIzquierda() {
 		this.x-=3;
 	}
 	
-	public void moverArriba() {
-		this.y -= 3;
+	private void moverArriba() {
+		this.y-=3;
 	}
 	
-	public void moverAbajo() {
-		this.y +=3;
+	private void moverAbajo() {
+		this.y+=3;
 	}
 
 	public double getX() {
@@ -65,14 +61,6 @@ public class Rasengan {
 
 	public double getY() {
 		return y;
-	}
-
-	public double getAncho() {
-		return ancho;
-	}
-
-	public double getAlto() {
-		return alto;
 	}
 	
 	public Rectangulo getRect() {

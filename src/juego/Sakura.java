@@ -1,6 +1,6 @@
 package juego;
+
 import java.awt.Image;
-import java.awt.Color;
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -12,12 +12,12 @@ public class Sakura {
 	private int direccion;
 	private Image sakuraImg;
 	
-	
 	public Sakura(double x, double y, double ancho, double alto) {
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.direccion=1;
 		this.sakuraImg=Herramientas.cargarImagen("imagenes/sakura.png");
 	}
 	
@@ -26,7 +26,7 @@ public class Sakura {
 	}
 	
 	public Rasengan disparar() {
-		return new Rasengan(x,y,15,15);
+		return new Rasengan(x,y,15,15,this.direccion);//se crea un disparo con la direccion de sakura
 	}
 	
 	public void moverse() {
@@ -49,9 +49,8 @@ public class Sakura {
 		this.direccion = direccion;
 	}
 	
-	
 	public void moverDerecha() {
-		this.x+= 2; 
+		this.x+=2; 
 	}
 	
 	public void moverIzquierda() {
@@ -59,11 +58,11 @@ public class Sakura {
 	}
 	
 	public void moverArriba() {
-		this.y -= 2;
+		this.y-=2;
 	}
 	
 	public void moverAbajo() {
-		this.y +=2;
+		this.y+=2;
 	}
 
 	public double getX() {
@@ -86,12 +85,4 @@ public class Sakura {
 		return new Rectangulo(x, y, ancho, alto);
 	}
 	
-	
-
-	
-	
-	
-	
-	
-
 }
