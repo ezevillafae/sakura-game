@@ -305,14 +305,14 @@ public class Juego extends InterfaceJuego {
 		}
 		if(cantVivos <=4) {
 			for (int i = 0; i < ninjasMuertos.length/2; i++) { // se recorren las posiciones del arreglo de ninjas muertos calles verticales
-				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+				if(ninjasMuertos[i] != null) {
 					this.ninjasMuertos[i].setY(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 					this.ninjasMuertos[i]=null;
 				}
 			}
 			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) { // se recorren las posiciones del arreglo de ninjas muertos calles horizontales
-				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+				if(ninjasMuertos[i] != null) {
 					this.ninjasMuertos[i].setX(-40);
 					this.ninjas[i] = this.ninjasMuertos[i];
 					this.ninjasMuertos[i]=null;
@@ -323,7 +323,7 @@ public class Juego extends InterfaceJuego {
 	
 	private void restaurarNinja() {
 			for (int i = 0; i < ninjasMuertos.length/2; i++) {
-				if(this.ninjasMuertos[i] != null && ninjas[i]==null) {
+				if(this.ninjasMuertos[i] != null) {
 					this.ninjasMuertos[i].setY(-200); //para que tarden en aparecer
 					this.ninjas[i] = this.ninjasMuertos[i];
 					this.ninjasMuertos[i]=null;
@@ -331,7 +331,7 @@ public class Juego extends InterfaceJuego {
 				}
 			}
 			for (int i = ninjasMuertos.length/2; i < ninjasMuertos.length; i++) {
-				if(ninjasMuertos[i] != null && ninjas[i]==null) {
+				if(ninjasMuertos[i] != null) {
 					this.ninjasMuertos[i].setX(-200); //para que tarden en aparecer
 					this.ninjas[i] = this.ninjasMuertos[i];
 					this.ninjasMuertos[i]=null;
