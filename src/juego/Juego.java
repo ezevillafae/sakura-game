@@ -169,6 +169,7 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void dibujarPuntaje() {
+		entorno.dibujarRectangulo(100/2, 45/2, 100, 45, 0, Color.black);
 		entorno.cambiarFont("Lucida Console", 20, Color.yellow);
 		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
 		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
