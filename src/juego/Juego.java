@@ -120,7 +120,7 @@ public class Juego extends InterfaceJuego {
 		ciudad.dibujar(entorno);
 		dibujarPuntaje();
 
-		señalizarFloreria();
+		senializarFloreria();
 		
 		//dibuja la flecha arriba de la casa
 		if(this.casaEntrega != null) {
@@ -241,7 +241,7 @@ public class Juego extends InterfaceJuego {
 		}
 	}	
 	
-	private void señalizarFloreria() {
+	private void senializarFloreria() {
 		if(this.ikebana == null) {
 			entorno.dibujarImagen(imgFlecha, this.floreria.getX(), this.floreria.getY()-40, 0, 0.77);
 		}
