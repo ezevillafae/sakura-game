@@ -352,6 +352,7 @@ public class Juego extends InterfaceJuego {
 		
 		// si se presiona la tecla espacio y no existe un disparo, se crea un disparo
 		if(this.entorno.sePresiono(entorno.TECLA_ESPACIO) && this.rasengan == null) {
+			Herramientas.play("sonido/sonidorasengan.wav");
 			this.rasengan = sakura.disparar();	
 		}
 			
