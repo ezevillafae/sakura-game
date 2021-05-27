@@ -1,6 +1,9 @@
 package juego;
 
 import java.util.Random;
+
+import javax.sound.sampled.Clip;
+
 import java.awt.Color;
 import java.awt.Image;
 import entorno.Entorno;
@@ -32,6 +35,7 @@ public class Juego extends InterfaceJuego {
 	private int muertes;
 	private int tickPuas;
 	private boolean juegoTerminado;
+	private Clip musicaFondo;
 	
 	Juego(){
 		// Inicializa el objeto entorno
@@ -67,6 +71,8 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicia el juego!
 		this.entorno.iniciar();
+		this.musicaFondo= Herramientas.cargarSonido("sonido/sonidofondo.wav");
+		this.musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
 	public void tick(){
