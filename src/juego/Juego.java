@@ -482,7 +482,7 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void cambiarVelocidadNinjas(){
-		if (this.puntaje==35) {
+		if (this.puntaje>=35) {
 			for (int i = 0; i < ninjas.length; i++) {
 				if (this.ninjas[i]!=null) {
 					this.ninjas[i].setVelocidad(2);
