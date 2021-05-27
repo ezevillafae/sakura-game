@@ -169,10 +169,11 @@ public class Juego extends InterfaceJuego {
 	}
 	
 	private void dibujarPuntaje() {
-		entorno.dibujarRectangulo(120/2, 45/2, 120, 45, 0, Color.black);
+		entorno.dibujarRectangulo(120/2, 30/2, 120, 30, 0, Color.black);
+		entorno.dibujarRectangulo(anchoPantalla-(120/2), 30/2, 120, 30, 0, Color.black);
 		entorno.cambiarFont("Lucida Console", 20, Color.yellow);
-		entorno.escribirTexto("Score :" + Integer.toString(puntaje), 2, 20);
-		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 40);
+		entorno.escribirTexto("Score :" + Integer.toString(puntaje), anchoPantalla-115, 20);
+		entorno.escribirTexto("Kills :" + Integer.toString(muertes), 2, 20);
 	}
 	
 	private void elegirCasa() {
